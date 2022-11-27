@@ -1,0 +1,213 @@
+@font-face { font-family: network-sans; src: url('https://archive.org/download/network-sans-2019/Network%20Sans%202019.zip/NETWORKSANS-2019-REGULAR.TTF'); } 
+* {
+font-family: network-sans;
+color: white;
+background-color: black;
+}
+
+td { padding: 10px; }
+
+#subServ0
+{
+    margin-left: -120px;
+    font-weight: normal;
+}
+#subServ1
+{
+    margin-left: -120px;
+    font-weight: normal;
+}
+#subServ2
+{
+    margin-left: -120px;
+    font-weight: normal;
+}
+
+#subSTD0
+{
+    vertical-align: top;
+    text-align: left;
+    border-bottom: solid 1px white;
+}
+#subSTD1
+{
+    vertical-align: top;
+    text-align: left;
+    border-bottom: solid 1px white;
+}
+#subSTD2
+{
+    vertical-align: top;
+    text-align: left;
+    border-bottom: solid 1px white;
+}
+
+#subETD0
+{
+    vertical-align: top;
+    border-bottom: solid 1px white;
+}
+#subETD1
+{
+    vertical-align: top;
+    border-bottom: solid 1px white;
+}
+#subETD2
+{
+    vertical-align: top;
+    border-bottom: solid 1px white;
+}
+
+#futureTrainsHeading
+{
+    background-color: white;
+    color: black;
+    text-align: left;
+    font-size: 75%;
+    border-bottom: solid 1px white;
+}
+
+#futureTrainsHeadingShed
+{
+    background-color: white;
+    color: black;
+    text-align: left;
+    font-size: 75%;
+    border-bottom: solid 1px white;
+    width : 10%;
+}
+
+#futureTrainsHeadingEsti
+{
+    background-color: white;
+    color: black;
+    text-align: left;
+    font-size: 75%;
+    border-bottom: solid 1px white;
+    width : 26%;
+}
+
+#subTable
+{
+    width:100%;
+    font-size: 200%;
+    text-align: center;
+    border-collapse: collapse;
+    border: solid 5px white;
+    height:500px;
+}
+
+#mainTable
+{
+    width:100%;
+    font-size: 200%;
+    text-align: Left;
+    margin-top:-75px;
+    margin-bottom: -20px;
+    border-collapse: collapse;
+    border-bottom: solid 1px white;
+    height:225px;
+}
+
+#routeStops
+{
+    width:100%;
+    font-size: 175%;
+    text-align: Left;
+    border-collapse: collapse;
+    border-bottom: solid 1px white;
+    border-top: solid 1px white;
+    height:350px;
+}
+
+#nextTrainTable
+{
+    padding:0px;
+    float:left;
+    width: 70%;
+}
+
+#mainDepature
+{
+    font-size: 250%;
+    font-weight:bolder;
+}
+
+#timeBorder
+{
+    background-color: white;
+    border-bottom: solid 1px white;
+}
+
+#mainDepatureTable
+{
+  border-bottom: solid 1px white;
+}
+
+#mainTerm
+{
+  vertical-align: -40%;
+}
+
+#mainDepatureSubTitle
+{
+  border-bottom: solid 1px white;
+  width:20%;
+}
+
+#mainDepatureHeading
+{
+  font-size: 25%;
+  vertical-align:bottom;
+}
+
+#mainETD
+{
+  font-size: 75%;
+  vertical-align:top;
+}
+
+#mainSTD
+{
+  font-size: 75%;
+  vertical-align:top;
+}
+
+#futureTrains
+{
+  float:left;
+  width: 30%;
+}
+
+#futuretrainDestMain
+{
+  text-align: left;
+  border-bottom: solid 1px white;
+}
+
+
+
+#arrivingTrains
+{
+  font-weight: bold;
+  border:none;
+  font-size:125%;
+}
+
+#noBorder
+{
+  border:none;
+}
+
+#clockBorder
+{
+  background-color: white;color:black;border-bottom: solid 1px white;
+}
+
+#time
+{
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  font-size: 175%;
+}
