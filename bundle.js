@@ -28123,19 +28123,23 @@ function date_toUntil(date, schedTime)  // Gives an estimate for departure time
 
 function arrayIncludeDisplay(stopId, stationName, iterator) // Departure Stop List fill function
 {
-  if(stopsArray.includes(stopId) == true)
+  if(terminus != true)
   {
-    document.getElementById('stopList'+ iterator).innerHTML = stationName
+    if(stopsArray.includes(stopId) == true)
+    {
+      document.getElementById('stopList'+ iterator).innerHTML = stationName
+    }
+    else 
+    {
+      document.getElementById('stopList'+ iterator).innerHTML = "---";
+    };
   }
-  else 
-  {
-    document.getElementById('stopList'+ iterator).innerHTML = "---";
-  };
 
   if(stopId == destinationStop)
   {
     terminus = true;
   };
+  console.log(terminus);
 };
 
 function clearDepartureBoard() // Clears the Departure Stop Board 
@@ -28233,9 +28237,6 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
               // if(stopsArray[stopsArray.length-1] == 1155)
 
               clearDepartureBoard();
-
-              while(terminus != true)
-              {
               arrayIncludeDisplay(1092, 'Heathmont', 0)
               arrayIncludeDisplay(1163, 'Ringwood', 1)
               arrayIncludeDisplay(1091, 'Heatherdale', 2)
@@ -28257,7 +28258,6 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
               arrayIncludeDisplay(1059, 'East Richmond', 18)
               arrayIncludeDisplay(1162, 'Richmond', 19)
               arrayIncludeDisplay(1071, 'Flinders Street', 20)
-              }
 
 
             }).catch(console.error);
