@@ -1,6 +1,9 @@
+
+
+
 console.log('Custom Javascript Loaded');
 
-
+// Test 1, 2, 3
 function date_toTime(date) // Converts "YYYY-MM-DDTHH:MM:SSZ" to "HH:MM" (plus 24 to 12h time) 
 {
   var h = date.getHours();
@@ -40,9 +43,8 @@ function clearDepatureBoard() // Clears the Depature Stop Board
 };
 
 const ptv = require('ptv-api');
-
-const devid = '0';
-const apikey = 'abc00000-0000-0000-0000-000000000000';
+const devid = (keys.DEVELOPERID);
+const apikey = (keys.APIKEY);
 var stopsArray = new Array();
 // var testArray = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 var mainDest;
