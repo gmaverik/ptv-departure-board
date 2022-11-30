@@ -29,21 +29,42 @@ function arrayIncludeDisplay(stopId, stationName, iterator) // Departure Stop Li
 {
   if(terminus != true)
   {
-    if(stopsArray.includes(stopId) == true)
+    // console.log(stopsArray)
+    if(stopsArray.length >= 18)
     {
-      document.getElementById('stopList'+ iterator).innerHTML = stationName
+      if(stopsArray.includes(stopId) == true)
+      {
+        document.getElementById('stopList'+ iterator).innerHTML = stationName
+      }
+      else 
+      {
+        document.getElementById('stopList'+ iterator).innerHTML = "---";
+      };
     }
-    else 
+
+    else
     {
-      document.getElementById('stopList'+ iterator).innerHTML = "---";
-    };
+      if(iterator >= 5) iterator +=2
+      if(iterator >= 10) iterator +=2
+      if(stopsArray.includes(stopId) == true)
+      {
+        document.getElementById('stopList'+ iterator).innerHTML = stationName
+        document.getElementById('stopList'+ iterator).style.fontSize = "150%";
+      }
+      else 
+      {
+        document.getElementById('stopList'+ iterator).innerHTML = "---";
+        document.getElementById('stopList'+ iterator).style.fontSize = "150%";
+      };
+    }
+    
   }
 
   if(stopId == destinationStop)
   {
     terminus = true;
   };
-  console.log(terminus);
+  // console.log(terminus);
 };
 
 function clearDepartureBoard() // Clears the Departure Stop Board 
@@ -113,7 +134,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
             ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [destinationStop], route_type: 0 });
             }).then(res => {
   
-              console.log(res.body.stop.stop_name)
+              // console.log(res.body.stop.stop_name)
               if(res.body.stop.stop_name == "Parliament ")
               {
                 document.getElementById('mainTerm').innerHTML = "Flinders Street ";
@@ -130,9 +151,10 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
             ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepatureRunRef], route_type: 0,  });
             }).then(res => {
   
+              var depArray = [];
               var depArray = [res.body.departures];
               depArray.sort(function(a, b){return a.departure_sequence - b.departure_sequence});
-
+              stopsArray.length = 0;
               for (let i = 0; i < depArray[0].length; i++) 
               {
                   stopsArray.push(depArray[0][i].stop_id);
