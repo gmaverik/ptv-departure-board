@@ -28096,6 +28096,8 @@ function config (name) {
 },{}],193:[function(require,module,exports){
 console.log('Custom Javascript Loaded');
 
+//file version 107
+
 function date_toTime(date) // Converts "YYYY-MM-DDTHH:MM:SSZ" to "HH:MM" (plus 24 to 12h time) 
 {
   var h = date.getHours();
@@ -28113,10 +28115,10 @@ function date_toUntil(date, schedTime)  // Gives an estimate for departure time
   {
     var difference = schedTime.getTime() - now.getTime(); // If so manually calculate remaining time until departure
   }
-    else // If a estimated time is provided
-    {
-      var difference = date.getTime() - now.getTime(); // Calculate the remaining time until the estimated departure time
-    };
+  else // If a estimated time is provided
+  {
+    var difference = date.getTime() - now.getTime(); // Calculate the remaining time until the estimated departure time
+  };
 
   return Math.ceil(difference / 60000);
 };
@@ -28136,7 +28138,6 @@ function arrayIncludeDisplay(stopId, stationName, iterator) // Departure Stop Li
         document.getElementById('stopList'+ iterator).innerHTML = "---";
       };
     }
-
     else
     {
       if(iterator >= 5) iterator += 2;
@@ -28152,9 +28153,7 @@ function arrayIncludeDisplay(stopId, stationName, iterator) // Departure Stop Li
         document.getElementById('stopList'+ iterator).style.fontSize = "150%";
       };
     }
-    
   }
-
   if(stopId == destinationStop)
   {
     terminus = true;
@@ -28167,7 +28166,7 @@ function clearDepartureBoard() // Clears the Departure Stop Board
   terminus = false;
   for (let i = 0; i < 21; i++)
   {
-  document.getElementById('stopList'+ i).innerHTML = " ";
+    document.getElementById('stopList'+ i).innerHTML = " ";
   };
 };
 
@@ -28191,41 +28190,37 @@ setInterval(() => {
   time = h + ':' + m;
   document.getElementById('time').innerHTML = time;
 
-ptvClient = ptv(devid, apikey); // Main Departure Destination
-ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
-}).then(res => {
-  mainDepaturePlatform = res.body.departures[0].platform_number;
-  mainDepatureDest = res.body.departures[0].direction_id;
-  mainDepatureRunRef = res.body.departures[0].run_ref;
+  ptvClient = ptv(devid, apikey); // Main Departure Destination
+  ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
+  }).then(res => {
+    mainDepaturePlatform = res.body.departures[0].platform_number;
+    mainDepatureDest = res.body.departures[0].direction_id;
+    mainDepatureRunRef = res.body.departures[0].run_ref;
 
-  var mainSTD = new Date(res.body.departures[0].scheduled_departure_utc);
-  document.getElementById('mainSTD').innerHTML = date_toTime(mainSTD);
+    var mainSTD = new Date(res.body.departures[0].scheduled_departure_utc);
+    document.getElementById('mainSTD').innerHTML = date_toTime(mainSTD);
   
     var mainDepatureEstiTime = new Date(res.body.departures[0].estimated_departure_utc);    
     
+    ptvClient = ptv(devid, apikey); 
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
+    }).then(res => {
+      if(res.body.departures[0].at_platform == true)
+      {
+        document.getElementById('mainETD').innerHTML = "now";
+      }
+      else
+      {
+        document.getElementById('mainETD').innerHTML = date_toUntil(mainDepatureEstiTime, mainSTD) + " min";
+      };
+    }).catch(console.error);
+      
+    ptvClient = ptv(devid, apikey); 
+    ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepatureRunRef], route_type: 0 });
+    }).then(res => {
+      destinationStop = res.body.departures[res.body.departures.length-1].stop_id;
+
       ptvClient = ptv(devid, apikey); 
-      ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
-      }).then(res => {
-    
-        if(res.body.departures[0].at_platform == true)
-          {
-            document.getElementById('mainETD').innerHTML = "now";
-          }
-        else
-          {
-            document.getElementById('mainETD').innerHTML = date_toUntil(mainDepatureEstiTime, mainSTD) + " min";
-          };
-    
-      }).catch(console.error);
-      
-      
-        ptvClient = ptv(devid, apikey); 
-        ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepatureRunRef], route_type: 0 });
-      }).then(res => {
-
-        destinationStop = res.body.departures[res.body.departures.length-1].stop_id;
-
-            ptvClient = ptv(devid, apikey); 
             ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [destinationStop], route_type: 0 });
             }).then(res => {
   

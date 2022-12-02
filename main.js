@@ -1,5 +1,7 @@
 console.log('Custom Javascript Loaded');
 
+//file version 107
+
 function date_toTime(date) // Converts "YYYY-MM-DDTHH:MM:SSZ" to "HH:MM" (plus 24 to 12h time) 
 {
   var h = date.getHours();
