@@ -7,57 +7,25 @@ background-color: black;
 
 td { padding: 10px; }
 
-#subServ0
-{
-    margin-left: -120px;
-    font-weight: normal;
-}
-#subServ1
-{
-    margin-left: -120px;
-    font-weight: normal;
-}
-#subServ2
+#subServ0, #subServ1, #subServ2
 {
     margin-left: -120px;
     font-weight: normal;
 }
 
-#subSTD0
-{
-    vertical-align: top;
-    text-align: left;
-    border-bottom: solid 1px white;
-}
-#subSTD1
-{
-    vertical-align: top;
-    text-align: left;
-    border-bottom: solid 1px white;
-}
-#subSTD2
+#subSTD0, #subSTD1, #subSTD2
 {
     vertical-align: top;
     text-align: left;
     border-bottom: solid 1px white;
 }
 
-#subETD0
+#subETD0, #subETD1, #subETD2
 {
     vertical-align: top;
     border-bottom: solid 1px white;
 }
-#subETD1
-{
-    vertical-align: top;
-    border-bottom: solid 1px white;
-}
-#subETD2
-{
-    vertical-align: top;
-    border-bottom: solid 1px white;
-}
-
+/* Comment */
 #futureTrainsHeading
 {
     background-color: white;
@@ -161,13 +129,7 @@ td { padding: 10px; }
   vertical-align:bottom;
 }
 
-#mainETD
-{
-  font-size: 75%;
-  vertical-align:top;
-}
-
-#mainSTD
+#mainETD, #mainSTD
 {
   font-size: 75%;
   vertical-align:top;
@@ -184,8 +146,6 @@ td { padding: 10px; }
   text-align: left;
   border-bottom: solid 1px white;
 }
-
-
 
 #arrivingTrains
 {
