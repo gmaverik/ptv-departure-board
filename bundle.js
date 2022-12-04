@@ -28123,7 +28123,7 @@ function date_toUntil(date, schedTime)  // Gives an estimate for departure time
   return Math.ceil(difference / 60000);
 };
 
-function arrayIncludeDisplay(stopId, stationName, iterator) // Departure Stop List fill function
+function arrayIncludeDisplay(stopId, stationName, iterator) // Departure Stop List fill function 
 {
   if(terminus != true)
   {
@@ -28171,13 +28171,14 @@ function clearDepartureBoard() // Clears the Departure Stop Board
 };
 
 const ptv = require('ptv-api');
-const devid = (keys.DEVELOPERID);
-const apikey = (keys.APIKEY);
+const devId = (keys.DEVELOPERID);
+const apiKey = (keys.APIKEY);
 var stopsArray = new Array();
 var mainDest;
 let a;
 let time;
 var terminus = false;
+ptvClient = ptv(devId, apiKey);
 
 setInterval(() => {
 
@@ -28190,19 +28191,18 @@ setInterval(() => {
   time = h + ':' + m;
   document.getElementById('time').innerHTML = time;
 
-  ptvClient = ptv(devid, apikey); // Main Departure Destination
+   // Main Departure Destination
   ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
   }).then(res => {
-    mainDepaturePlatform = res.body.departures[0].platform_number;
-    mainDepatureDest = res.body.departures[0].direction_id;
-    mainDepatureRunRef = res.body.departures[0].run_ref;
+    mainDeparturePlatform = res.body.departures[0].platform_number;
+    mainDepartureDest = res.body.departures[0].direction_id;
+    mainDepartureRunRef = res.body.departures[0].run_ref;
 
     var mainSTD = new Date(res.body.departures[0].scheduled_departure_utc);
     document.getElementById('mainSTD').innerHTML = date_toTime(mainSTD);
   
-    var mainDepatureEstiTime = new Date(res.body.departures[0].estimated_departure_utc);    
+    var mainDepartureEstiTime = new Date(res.body.departures[0].estimated_departure_utc);    
     
-    ptvClient = ptv(devid, apikey); 
     ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
     }).then(res => {
       if(res.body.departures[0].at_platform == true)
@@ -28211,16 +28211,14 @@ setInterval(() => {
       }
       else
       {
-        document.getElementById('mainETD').innerHTML = date_toUntil(mainDepatureEstiTime, mainSTD) + " min";
+        document.getElementById('mainETD').innerHTML = date_toUntil(mainDepartureEstiTime, mainSTD) + " min";
       };
     }).catch(console.error);
       
-    ptvClient = ptv(devid, apikey); 
-    ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepatureRunRef], route_type: 0 });
+    ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepartureRunRef], route_type: 0 });
     }).then(res => {
       destinationStop = res.body.departures[res.body.departures.length-1].stop_id;
 
-      ptvClient = ptv(devid, apikey); 
             ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [destinationStop], route_type: 0 });
             }).then(res => {
   
@@ -28237,8 +28235,8 @@ setInterval(() => {
               };
     
             }).catch(console.error);
-            ptvClient = ptv(devid, apikey); 
-            ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepatureRunRef], route_type: 0,  });
+
+            ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepartureRunRef], route_type: 0,  });
             }).then(res => {
   
               var depArray = [];
@@ -28250,7 +28248,6 @@ setInterval(() => {
                   stopsArray.push(depArray[0][i].stop_id);
               };
               // console.log(stopsArray[stopsArray.length-1])
-              // if(stopsArray[stopsArray.length-1] == 1155)
 
               clearDepartureBoard();
               arrayIncludeDisplay(1092, 'Heathmont', 0);
@@ -28278,38 +28275,26 @@ setInterval(() => {
 
             }).catch(console.error);
 
-            // document.getElementById('stopList'+0).innerHTML = "test";
-            // var testArray = [stop : 1, order : 9]
-            // console.log(testArray)
-            
-            // console.log(testArray[0])
-            
-// for (let i = 0; i < stopsArray.length; i++) {
-  //  console.log(stopsArray[i])
-  // document.getElementById('stopList'+[i]).innerHTML = stopsArray[i];
-// }
-
 }).catch(console.error);
 
 }).catch(console.error);
 
 
-ptvClient = ptv(devid, apikey); // Sub0 Depature Destination
+// Sub0 Departure Destination
 ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
 }).then(res => {
   
-    sub0DepatureRunRef = res.body.departures[1].run_ref;
-    //console.log("mainDepatureRunRef = " + mainDepatureRunRef);
+    sub0DepartureRunRef = res.body.departures[1].run_ref;
+    //console.log("mainDepartureRunRef = " + mainDepartureRunRef);
 
-    var sub0DepatureShedTime = new Date(res.body.departures[1].scheduled_departure_utc);
-    document.getElementById('subSTD0').innerHTML = date_toTime(sub0DepatureShedTime);
+    var sub0DepartureShedTime = new Date(res.body.departures[1].scheduled_departure_utc);
+    document.getElementById('subSTD0').innerHTML = date_toTime(sub0DepartureShedTime);
     //console.log("mainSTD = " + date_toTime(mainSTD));
 
-    var sub0DepatureEstiTime = new Date(res.body.departures[1].estimated_departure_utc);
-    //console.log("mainETD   = " + date_toUntil(mainDepatureEstiTime));
+    var sub0DepartureEstiTime = new Date(res.body.departures[1].estimated_departure_utc);
+    //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient = ptv(devid, apikey); 
     ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
   }).then(res => {
     
@@ -28319,22 +28304,20 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
       document.getElementById('subETD0').innerHTML = "now";
     }
     else{
-      document.getElementById('subETD0').innerHTML = date_toUntil(sub0DepatureEstiTime, sub0DepatureShedTime) + " min";
+      document.getElementById('subETD0').innerHTML = date_toUntil(sub0DepartureEstiTime, sub0DepartureShedTime) + " min";
     };
     
   }).catch(console.error);
 
 
-      ptvClient = ptv(devid, apikey); 
-      ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [sub0DepatureRunRef], route_type: 0 });
+      ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [sub0DepartureRunRef], route_type: 0 });
       }).then(res => {
 
           //console.log("routeLength = " + res.body.departures.length);
           sub0DestinationStop = res.body.departures[res.body.departures.length-1].stop_id;
           //console.log("finalDestinationId = " + destinationStop)
           
-            ptvClient = ptv(devid, apikey); 
-            ptvClient.then(apis => { return apis.Runs.Runs_ForRun({  run_id: [sub0DepatureRunRef] });
+            ptvClient.then(apis => { return apis.Runs.Runs_ForRun({  run_id: [sub0DepartureRunRef] });
             }).then(res => {
               if(res.body.runs[0].express_stop_count == 0)
               { 
@@ -28347,7 +28330,6 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
             }).catch(console.error);
 
-            ptvClient = ptv(devid, apikey); 
             ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [sub0DestinationStop], route_type: 0 });
             }).then(res => {
   
@@ -28372,22 +28354,21 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
 
 
-ptvClient = ptv(devid, apikey); // Sub1 Depature Destination
+// Sub1 Departure Destination
 ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
 }).then(res => {
   
-    sub1DepatureRunRef = res.body.departures[2].run_ref;
-    //console.log("mainDepatureRunRef = " + mainDepatureRunRef);
+    sub1DepartureRunRef = res.body.departures[2].run_ref;
+    //console.log("mainDepartureRunRef = " + mainDepartureRunRef);
 
-    var sub1DepatureShedTime = new Date(res.body.departures[2].scheduled_departure_utc);
-    document.getElementById('subSTD1').innerHTML = date_toTime(sub1DepatureShedTime);
+    var sub1DepartureShedTime = new Date(res.body.departures[2].scheduled_departure_utc);
+    document.getElementById('subSTD1').innerHTML = date_toTime(sub1DepartureShedTime);
     //console.log("mainSTD = " + date_toTime(mainSTD));
 
-    var sub1DepatureEstiTime = new Date(res.body.departures[2].estimated_departure_utc);
-    //console.log("mainETD   = " + date_toUntil(mainDepatureEstiTime));
+    var sub1DepartureEstiTime = new Date(res.body.departures[2].estimated_departure_utc);
+    //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient = ptv(devid, apikey); 
     ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
   }).then(res => {
     
@@ -28398,22 +28379,20 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
     }
     else
     {
-      document.getElementById('subETD1').innerHTML = date_toUntil(sub1DepatureEstiTime, sub1DepatureShedTime) + " min";
+      document.getElementById('subETD1').innerHTML = date_toUntil(sub1DepartureEstiTime, sub1DepartureShedTime) + " min";
     };
     
   }).catch(console.error);
 
 
-      ptvClient = ptv(devid, apikey); 
-      ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [sub1DepatureRunRef], route_type: 0 });
+      ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [sub1DepartureRunRef], route_type: 0 });
       }).then(res => {
 
           //console.log("routeLength = " + res.body.departures.length);
           sub1DestinationStop = res.body.departures[res.body.departures.length-1].stop_id;
           //console.log("finalDestinationId = " + destinationStop)
 
-          ptvClient = ptv(devid, apikey); 
-          ptvClient.then(apis => { return apis.Runs.Runs_ForRun({  run_id: [sub1DepatureRunRef] });
+          ptvClient.then(apis => { return apis.Runs.Runs_ForRun({  run_id: [sub1DepartureRunRef] });
         }).then(res => {
           //console.log(res.body.runs[0].express_stop_count)
           if(res.body.runs[0].express_stop_count == 0)
@@ -28427,7 +28406,6 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
   
           }).catch(console.error);
 
-            ptvClient = ptv(devid, apikey); 
             ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [sub1DestinationStop], route_type: 0 });
             }).then(res => {
   
@@ -28452,22 +28430,21 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
 
 
-ptvClient = ptv(devid, apikey); // Sub2 Depature Destination
+// Sub2 Departure Destination
 ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
 }).then(res => {
   
-    sub2DepatureRunRef = res.body.departures[3].run_ref;
-    //console.log("mainDepatureRunRef = " + mainDepatureRunRef);
+    sub2DepartureRunRef = res.body.departures[3].run_ref;
+    //console.log("mainDepartureRunRef = " + mainDepartureRunRef);
 
-    var sub2DepatureShedTime = new Date(res.body.departures[3].scheduled_departure_utc);
-    document.getElementById('subSTD2').innerHTML = date_toTime(sub2DepatureShedTime);
+    var sub2DepartureShedTime = new Date(res.body.departures[3].scheduled_departure_utc);
+    document.getElementById('subSTD2').innerHTML = date_toTime(sub2DepartureShedTime);
     //console.log("mainSTD = " + date_toTime(mainSTD));
 
-    var sub2DepatureEstiTime = new Date(res.body.departures[3].estimated_departure_utc);
-    //console.log("mainETD   = " + date_toUntil(mainDepatureEstiTime));
+    var sub2DepartureEstiTime = new Date(res.body.departures[3].estimated_departure_utc);
+    //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient = ptv(devid, apikey); 
     ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numberss: 1 });
   }).then(res => {
     
@@ -28477,22 +28454,20 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
       document.getElementById('subETD2').innerHTML = "now";
     }
     else{
-      document.getElementById('subETD2').innerHTML = date_toUntil(sub2DepatureEstiTime, sub2DepatureShedTime) + " min";
+      document.getElementById('subETD2').innerHTML = date_toUntil(sub2DepartureEstiTime, sub2DepartureShedTime) + " min";
     };
     
   }).catch(console.error);
 
 
-      ptvClient = ptv(devid, apikey); 
-      ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [sub2DepatureRunRef], route_type: 0 });
+      ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [sub2DepartureRunRef], route_type: 0 });
       }).then(res => {
 
           //console.log("routeLength = " + res.body.departures.length);
           sub2DestinationStop = res.body.departures[res.body.departures.length-1].stop_id;
           //console.log("finalDestinationId = " + destinationStop)
 
-          ptvClient = ptv(devid, apikey); 
-            ptvClient.then(apis => { return apis.Runs.Runs_ForRun({  run_id: [sub2DepatureRunRef] });
+            ptvClient.then(apis => { return apis.Runs.Runs_ForRun({  run_id: [sub2DepartureRunRef] });
             }).then(res => {
 
               if(res.body.runs[0].direction_id == 3)
@@ -28510,7 +28485,6 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
             }).catch(console.error);
 
-            ptvClient = ptv(devid, apikey); 
             ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [sub2DestinationStop], route_type: 0 });
             }).then(res => {
   
