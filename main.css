@@ -95,7 +95,7 @@ td { padding: 10px; }
     width: 70%;
 }
 
-#mainDepature
+#mainDeparture
 {
     font-size: 250%;
     font-weight:bolder;
@@ -107,7 +107,7 @@ td { padding: 10px; }
     border-bottom: solid 1px white;
 }
 
-#mainDepatureTable
+#mainDepartureTable
 {
   border-bottom: solid 1px white;
 }
@@ -117,13 +117,13 @@ td { padding: 10px; }
   vertical-align: -40%;
 }
 
-#mainDepatureSubTitle
+#mainDepartureSubTitle
 {
   border-bottom: solid 1px white;
   width:20%;
 }
 
-#mainDepatureHeading
+#mainDepartureHeading
 {
   font-size: 25%;
   vertical-align:bottom;
