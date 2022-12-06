@@ -1,4 +1,4 @@
-var stops = {
+var stationNames = {
     1092 : 'Heathmont',
     1163 : 'Ringwood',
     1091 : 'Heatherdale',
