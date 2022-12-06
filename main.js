@@ -1,5 +1,6 @@
 console.log('Custom Javascript Loaded');
-
+const userStation = prompt("Station Id", 1016);
+const userPlatform = prompt("Platform Number", 1);
 //file version 107
 
 function date_toTime(date) // Converts "YYYY-MM-DDTHH:MM:SSZ" to "HH:MM" (plus 24 to 12h time) 
@@ -27,7 +28,7 @@ function date_toUntil(date, schedTime)  // Gives an estimate for departure time
   return Math.ceil(difference / 60000);
 };
 
-function arrayIncludeDisplay(stopId, stationName, iterator) // Departure Stop List fill function 
+function arrayIncludeDisplay(stopId, iterator) // Departure Stop List fill function 
 {
   if(terminus != true)
   {
@@ -35,7 +36,7 @@ function arrayIncludeDisplay(stopId, stationName, iterator) // Departure Stop Li
     {
       if(stopsArray.includes(stopId) == true)
       {
-        document.getElementById('stopList'+ iterator).innerHTML = stationName;
+        document.getElementById('stopList'+ iterator).innerHTML = stationNames[stopId];
       }
       else 
       {
@@ -48,7 +49,7 @@ function arrayIncludeDisplay(stopId, stationName, iterator) // Departure Stop Li
       if(iterator >= 10) iterator += 2;
       if(stopsArray.includes(stopId) == true)
       {
-        document.getElementById('stopList'+ iterator).innerHTML = stationName;
+        document.getElementById('stopList'+ iterator).innerHTML = stationNames[stopId];
         document.getElementById('stopList'+ iterator).style.fontSize = "150%";
       }
       else 
@@ -84,6 +85,8 @@ let time;
 var terminus = false;
 ptvClient = ptv(devId, apiKey);
 
+// console.log(stops[1012]);
+
 setInterval(() => {
 
   a = new Date();
@@ -96,7 +99,7 @@ setInterval(() => {
   document.getElementById('time').innerHTML = time;
 
    // Main Departure Destination
-  ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
+  ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
     mainDeparturePlatform = res.body.departures[0].platform_number;
     mainDepartureDest = res.body.departures[0].direction_id;
@@ -107,7 +110,7 @@ setInterval(() => {
   
     var mainDepartureEstiTime = new Date(res.body.departures[0].estimated_departure_utc);    
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
     }).then(res => {
       if(res.body.departures[0].at_platform == true)
       {
@@ -154,27 +157,27 @@ setInterval(() => {
               // console.log(stopsArray[stopsArray.length-1])
 
               clearDepartureBoard();
-              arrayIncludeDisplay(1092, 'Heathmont', 0);
-              arrayIncludeDisplay(1163, 'Ringwood', 1);
-              arrayIncludeDisplay(1091, 'Heatherdale', 2);
-              arrayIncludeDisplay(1128, 'Mitcham', 3);
-              arrayIncludeDisplay(1148, 'Nunawading', 4);
-              arrayIncludeDisplay(1023, 'Blackburn', 5);
-              arrayIncludeDisplay(1111, 'Laburnum', 6);
-              arrayIncludeDisplay(1026, 'Box Hill', 7);
-              arrayIncludeDisplay(1129, 'Mont Albert', 8);
-              arrayIncludeDisplay(1189, 'Surrey Hills', 9);
-              arrayIncludeDisplay(1037, 'Chatham', 10);
-              arrayIncludeDisplay(1033, 'Canterbury', 11);
-              arrayIncludeDisplay(1057, 'East Camberwell', 12);
-              arrayIncludeDisplay(1032, 'Camberwell', 13);
-              arrayIncludeDisplay(1012, 'Auburn', 14);
-              arrayIncludeDisplay(1080, 'Glenferrie', 15);
-              arrayIncludeDisplay(1090, 'Hawthorn', 16);
-              arrayIncludeDisplay(1030, 'Burnley', 17);
-              arrayIncludeDisplay(1059, 'East Richmond', 18);
-              arrayIncludeDisplay(1162, 'Richmond', 19);
-              arrayIncludeDisplay(1071, 'Flinders Street', 20);
+              arrayIncludeDisplay(1092, 0); // Heathmont
+              arrayIncludeDisplay(1163, 1); // Ringwood
+              arrayIncludeDisplay(1091, 2); // Heatherdale
+              arrayIncludeDisplay(1128, 3); // Mitcham
+              arrayIncludeDisplay(1148, 4); // Nunawading
+              arrayIncludeDisplay(1023, 5); // Blackburn
+              arrayIncludeDisplay(1111, 6); // Laburnum
+              arrayIncludeDisplay(1026, 7); // Box Hill
+              arrayIncludeDisplay(1129, 8); // Mont Albert
+              arrayIncludeDisplay(1189, 9); // Surrey Hills
+              arrayIncludeDisplay(1037, 10); // Chatham
+              arrayIncludeDisplay(1033, 11); // Canterbury
+              arrayIncludeDisplay(1057, 12); // East Camberwell
+              arrayIncludeDisplay(1032, 13); // Camberwell
+              arrayIncludeDisplay(1012, 14); // Auburn
+              arrayIncludeDisplay(1080, 15); // Glenferrie
+              arrayIncludeDisplay(1090, 16); // Hawthorn
+              arrayIncludeDisplay(1030, 17); // Burnley
+              arrayIncludeDisplay(1059, 18); // East Richmond
+              arrayIncludeDisplay(1162, 19); // Richmond
+              arrayIncludeDisplay(1071, 20); // Flinders Street
 
 
             }).catch(console.error);
@@ -185,7 +188,7 @@ setInterval(() => {
 
 
 // Sub0 Departure Destination
-ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
+ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
 }).then(res => {
   
     sub0DepartureRunRef = res.body.departures[1].run_ref;
@@ -199,7 +202,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
     //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
     
     //console.log(res.body.departures[0].at_platform)
@@ -259,7 +262,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
 
 // Sub1 Departure Destination
-ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
+ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
 }).then(res => {
   
     sub1DepartureRunRef = res.body.departures[2].run_ref;
@@ -273,7 +276,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
     //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
     
     //console.log(res.body.departures[0].at_platform)
@@ -335,7 +338,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
 
 // Sub2 Departure Destination
-ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: 1 });
+ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
 }).then(res => {
   
     sub2DepartureRunRef = res.body.departures[3].run_ref;
@@ -349,7 +352,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
     //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numberss: 1 });
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userplatform] });
   }).then(res => {
     
     //console.log(res.body.departures[0].at_platform)
