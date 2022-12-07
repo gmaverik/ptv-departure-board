@@ -1,7 +1,8 @@
 console.log('Custom Javascript Loaded');
-const userStation = prompt("Station Id", 1016);
-const userPlatform = prompt("Platform Number", 1);
-//file version 107
+const userStation = 1016 //prompt("Station Id", 1016);
+const userPlatform = 1 //prompt("Platform Number", 1);
+
+//file version 108.a
 
 function date_toTime(date) // Converts "YYYY-MM-DDTHH:MM:SSZ" to "HH:MM" (plus 24 to 12h time) 
 {
