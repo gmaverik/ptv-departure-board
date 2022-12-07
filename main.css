@@ -3,10 +3,65 @@
 font-family: network-sans;
 color: white;
 background-color: black;
+font-size: 2vw;
 }
 
-td { padding: 10px; }
+/* td
+{
+  padding: 10px; 
+} */
 
+/* New CSS Formatting */
+
+#body
+{
+  width: 100%;
+  aspect-ratio: 32 / 9;
+  background-color: aquamarine; /* Just to show the bounding box */
+}
+
+#secondaryDeparturesMain
+{
+  float:left;
+  width: 30%;
+  height: 100%;
+}
+
+#secondaryDeparturesTable
+{
+  width:100%;
+  font-size: 200%;
+  text-align: center;
+  border-collapse: collapse;
+  border: solid 5px white;
+  height:100%;
+}
+
+.secondaryDeparturesTableHeading
+{
+  background-color: white;
+  color: black;
+  text-align: left;
+  font-size: 50%;
+  border-bottom: solid 1px white;
+}
+
+#futureTrainsHeadingShed
+{
+    width : 20%;
+}
+
+#futureTrainsHeading
+{
+  width: 50%;
+}
+
+#futureTrainsHeadingEsti
+{
+    width : 30%;
+}
+
+/* Old CSS Formatting */
 #subServ0, #subServ1, #subServ2
 {
     margin-left: -120px;
@@ -26,44 +81,8 @@ td { padding: 10px; }
     border-bottom: solid 1px white;
 }
 /* Comment */
-#futureTrainsHeading
-{
-    background-color: white;
-    color: black;
-    text-align: left;
-    font-size: 75%;
-    border-bottom: solid 1px white;
-}
 
-#futureTrainsHeadingShed
-{
-    background-color: white;
-    color: black;
-    text-align: left;
-    font-size: 75%;
-    border-bottom: solid 1px white;
-    width : 10%;
-}
 
-#futureTrainsHeadingEsti
-{
-    background-color: white;
-    color: black;
-    text-align: left;
-    font-size: 75%;
-    border-bottom: solid 1px white;
-    width : 26%;
-}
-
-#subTable
-{
-    width:100%;
-    font-size: 200%;
-    text-align: center;
-    border-collapse: collapse;
-    border: solid 5px white;
-    height:500px;
-}
 
 #mainTable
 {
@@ -133,12 +152,6 @@ td { padding: 10px; }
 {
   font-size: 75%;
   vertical-align:top;
-}
-
-#futureTrains
-{
-  float:left;
-  width: 30%;
 }
 
 #futuretrainDestMain
