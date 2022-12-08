@@ -33,7 +33,7 @@ font-size: 2vw;
   font-size: 200%;
   text-align: center;
   border-collapse: collapse;
-  border: solid 5px white;
+  border: solid 5px white; /* Convert px value to % */
   height:100%;
 }
 
@@ -43,7 +43,7 @@ font-size: 2vw;
   color: black;
   text-align: left;
   font-size: 50%;
-  border-bottom: solid 1px white;
+  border-bottom: solid 1px white; /* Convert px value to % */
 }
 
 #futureTrainsHeadingShed
@@ -61,12 +61,22 @@ font-size: 2vw;
     width : 30%;
 }
 
-/* Old CSS Formatting */
+.secondaryDeparturesTableData
+{
+  padding-left: 1%;
+}
+
+#subTerm0, #subTerm1, #subTerm2
+{
+  font-weight: bolder;
+}
+
 #subServ0, #subServ1, #subServ2
 {
     margin-left: -120px;
     font-weight: normal;
 }
+/* Old CSS Formatting */
 
 #subSTD0, #subSTD1, #subSTD2
 {
@@ -182,5 +192,5 @@ font-size: 2vw;
   background-color: white;
   color: black;
   font-weight: bold;
-  font-size: 175%;
+  font-size: 125%;
 }
