@@ -73,9 +73,22 @@ font-size: 2vw;
 
 #subServ0, #subServ1, #subServ2
 {
-    margin-left: -120px;
+    margin-left: -40%;
     font-weight: normal;
 }
+
+#primaryDepartureHeading
+{
+    width:100%;
+    /* font-size: 200%; */
+    text-align: Left;
+    margin-top:-7.5vh;
+    margin-bottom: -20px;
+    border-collapse: collapse;
+    border-bottom: solid 1px white;
+    height:22.5vh;
+}
+
 /* Old CSS Formatting */
 
 #subSTD0, #subSTD1, #subSTD2
@@ -94,17 +107,7 @@ font-size: 2vw;
 
 
 
-#mainTable
-{
-    width:100%;
-    font-size: 200%;
-    text-align: Left;
-    margin-top:-75px;
-    margin-bottom: -20px;
-    border-collapse: collapse;
-    border-bottom: solid 1px white;
-    height:225px;
-}
+
 
 #routeStops
 {
@@ -168,6 +171,7 @@ font-size: 2vw;
 {
   text-align: left;
   border-bottom: solid 1px white;
+  vertical-align: text-top;
 }
 
 #arrivingTrains
