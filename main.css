@@ -80,13 +80,12 @@ font-size: 2vw;
 #primaryDepartureHeading
 {
     width:100%;
-    /* font-size: 200%; */
     text-align: Left;
-    margin-top:-7.5vh;
-    margin-bottom: -20px;
+    /* margin-top:-2.5vw; */
+    /* margin-bottom: 0vw; */
     border-collapse: collapse;
     border-bottom: solid 1px white;
-    height:22.5vh;
+    height:25%;
 }
 
 /* Old CSS Formatting */
@@ -103,6 +102,14 @@ font-size: 2vw;
     vertical-align: top;
     border-bottom: solid 1px white;
 }
+
+#nextTrainTable
+{
+    padding:0px;
+    float:left;
+    width: 70%;
+    height: 100%;
+}
 /* Comment */
 
 
@@ -117,15 +124,9 @@ font-size: 2vw;
     border-collapse: collapse;
     border-bottom: solid 1px white;
     border-top: solid 1px white;
-    height:350px;
+    /* height:50vh; */
 }
 
-#nextTrainTable
-{
-    padding:0px;
-    float:left;
-    width: 70%;
-}
 
 #mainDeparture
 {
@@ -146,7 +147,9 @@ font-size: 2vw;
 
 #mainTerm
 {
-  vertical-align: -40%;
+  /* vertical-align: -35%; */
+  font-size: 250%;
+  vertical-align: top;
 }
 
 #mainDepartureSubTitle

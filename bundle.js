@@ -28134,10 +28134,12 @@ function arrayIncludeDisplay(stopId, iterator) // Departure Stop List fill funct
       if(stopsArray.includes(stopId) == true)
       {
         document.getElementById('stopList'+ iterator).innerHTML = stationNames[stopId];
+        document.getElementById('stopList'+ iterator).style.fontSize = "100%";
       }
       else 
       {
         document.getElementById('stopList'+ iterator).innerHTML = "---";
+        document.getElementById('stopList'+ iterator).style.fontSize = "100%";
       };
     }
     else
@@ -28222,23 +28224,8 @@ setInterval(() => {
     ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepartureRunRef], route_type: 0 });
     }).then(res => {
       destinationStop = res.body.departures[res.body.departures.length-1].stop_id;
-
-            ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [destinationStop], route_type: 0 });
-            }).then(res => {
-  
-              // console.log(res.body.stop.stop_name)
-              if(res.body.stop.stop_name == "Parliament ")
-              {
-                document.getElementById('mainTerm').innerHTML = "Flinders Street ";
-                mainDest = "Flinders Street ";
-              }
-              else
-              {
-                document.getElementById('mainTerm').innerHTML = res.body.stop.stop_name;
-                mainDest = res.body.stop.stop_name;
-              };
-    
-            }).catch(console.error);
+            
+            console.log(mainDest);
 
             ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepartureRunRef], route_type: 0,  });
             }).then(res => {
@@ -28275,6 +28262,33 @@ setInterval(() => {
               arrayIncludeDisplay(1059, 18); // East Richmond
               arrayIncludeDisplay(1162, 19); // Richmond
               arrayIncludeDisplay(1071, 20); // Flinders Street
+
+              ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [destinationStop], route_type: 0 });
+            }).then(res => {
+  
+              // console.log(res.body.stop.stop_name)
+              if(res.body.stop.stop_name == "Parliament ")
+              {
+                document.getElementById('mainTerm').innerHTML = "Flinders Street (p)";
+                mainDest = "Flinders Street ";
+              }
+              else if(res.body.stop.stop_name == "Flinders Street ")
+              {
+
+                if(stopsArray.includes(1155) == true)
+                {
+                  document.getElementById('mainTerm').innerHTML = "City Loop ";
+                  mainDest = "City Loop ";
+                }
+
+              }
+              else
+              {
+                document.getElementById('mainTerm').innerHTML = res.body.stop.stop_name;
+                mainDest = res.body.stop.stop_name;
+              };
+    
+            }).catch(console.error);
 
 
             }).catch(console.error);
@@ -28327,9 +28341,13 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
               { 
                 document.getElementById('subServ0').innerHTML = 'Stops All';
               }
+              // else if(res.body.runs[0].express_stop_count == 1)
+              // { 
+              //   document.getElementById('subServ0').innerHTML = 'Not Stopping at N/a';
+              // }
               else
               { 
-                document.getElementById('subServ0').innerHTML = 'Express';
+                document.getElementById('subServ0').innerHTML = 'Ltd Express';
               };
 
             }).catch(console.error);
@@ -28339,13 +28357,13 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
   
               if(res.body.stop.stop_name == "Parliament ")
               {
-                document.getElementById('subTerm0').innerHTML = "Flinders Street ";
-                mainDest = "Flinders Street ";
+                document.getElementById('subTerm0').innerHTML = "Flinders Street (p)";
+                sub0Dest = "Flinders Street ";
               }
               else
               {
                 document.getElementById('subTerm0').innerHTML = res.body.stop.stop_name;
-                mainDest = res.body.stop.stop_name;
+                sub0Dest = res.body.stop.stop_name;
               };              
               //console.log("finalDestinationName = " + res.body.stop.stop_name)
     
@@ -28403,9 +28421,13 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
           { 
             document.getElementById('subServ1').innerHTML = 'Stops All';
           }
+          // else if(res.body.runs[0].express_stop_count == 1)
+          // { 
+          //   document.getElementById('subServ1').innerHTML = 'Not Stopping at N/a';
+          // }
           else
           { 
-            document.getElementById('subServ1').innerHTML = 'Express';
+            document.getElementById('subServ1').innerHTML = 'Ltd Express';
           };
   
           }).catch(console.error);
@@ -28415,13 +28437,13 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
   
               if(res.body.stop.stop_name == "Parliament ")
               {
-                document.getElementById('subTerm1').innerHTML = "Flinders Street ";
-                mainDest = "Flinders Street ";
+                document.getElementById('subTerm1').innerHTML = "Flinders Street (p)";
+                sub1Dest = "Flinders Street ";
               }
               else
               {
                 document.getElementById('subTerm1').innerHTML = res.body.stop.stop_name;
-                mainDest = res.body.stop.stop_name;
+                sub1Dest = res.body.stop.stop_name;
               };              
               //console.log("finalDestinationName = " + res.body.stop.stop_name)
     
@@ -28449,7 +28471,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
     //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userplatform] });
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
     
     //console.log(res.body.departures[0].at_platform)
@@ -28474,17 +28496,17 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
             ptvClient.then(apis => { return apis.Runs.Runs_ForRun({  run_id: [sub2DepartureRunRef] });
             }).then(res => {
 
-              if(res.body.runs[0].direction_id == 3)
+              if(res.body.runs[0].express_stop_count == 0)
               { 
                 document.getElementById('subServ2').innerHTML = 'Stops All';
               }
-              else if(res.body.runs[0].express_stop_count == 0)
-              { 
-                document.getElementById('subServ2').innerHTML = 'Stops All';
-              }
+              // else if(res.body.runs[0].express_stop_count == 1)
+              // { 
+              //   document.getElementById('subServ2').innerHTML = 'Not Stopping at N/a';
+              // }
               else
               { 
-                document.getElementById('subServ2').innerHTML = 'Express';
+                document.getElementById('subServ2').innerHTML = 'Ltd Express';
               };
 
             }).catch(console.error);
@@ -28494,13 +28516,13 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
   
               if(res.body.stop.stop_name == "Parliament ")
               {
-                document.getElementById('subTerm2').innerHTML = "Flinders Street ";
-                mainDest = "Flinders Street ";
+                document.getElementById('subTerm2').innerHTML = "Flinders Street (p)";
+                sub2Dest = "Flinders Street ";
               }
               else
               {
                 document.getElementById('subTerm2').innerHTML = res.body.stop.stop_name;
-                mainDest = res.body.stop.stop_name;
+                sub2Dest = res.body.stop.stop_name;
               };              
               //console.log("finalDestinationName = " + res.body.stop.stop_name)
     
