@@ -124,6 +124,7 @@ font-size: 2vw;
     border-collapse: collapse;
     border-bottom: solid 1px white;
     border-top: solid 1px white;
+    height: 75%;
     /* height:50vh; */
 }
 

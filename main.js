@@ -78,6 +78,25 @@ function clearDepartureBoard() // Clears the Departure Stop Board
   };
 };
 
+function isCityLoop(terminus) // Checks if service is a city loop service or a direct to flinders street service
+{
+  if(stopsArray.includes(1155 || 1120 || 1068))
+  {
+      if(terminus == 1155 || 1120 || 1068)
+      {
+        return false;
+      }
+      else if(terminus == 1071 && stopsArray.includes(1155 || 1120 || 1068))
+      {
+        return true;
+      }
+      else
+      {
+        return;
+      }
+  }
+};
+
 const ptv = require('ptv-api');
 const devId = (keys.DEVELOPERID);
 const apiKey = (keys.APIKEY);
@@ -129,7 +148,8 @@ setInterval(() => {
     }).then(res => {
       destinationStop = res.body.departures[res.body.departures.length-1].stop_id;
             
-            console.log(mainDest);
+            // console.log(mainDest);
+            console.log(destinationStop);
 
             ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepartureRunRef], route_type: 0,  });
             }).then(res => {
@@ -171,20 +191,15 @@ setInterval(() => {
             }).then(res => {
   
               // console.log(res.body.stop.stop_name)
+              if(isCityLoop(destinationStop) == true)
+              {
+                document.getElementById('mainTerm').innerHTML = "City Loop";
+                mainDest = "City Loop ";
+              }
               if(res.body.stop.stop_name == "Parliament ")
               {
-                document.getElementById('mainTerm').innerHTML = "Flinders Street (p)";
+                document.getElementById('mainTerm').innerHTML = "Flinders Street ";
                 mainDest = "Flinders Street ";
-              }
-              else if(res.body.stop.stop_name == "Flinders Street ")
-              {
-
-                if(stopsArray.includes(1155) == true)
-                {
-                  document.getElementById('mainTerm').innerHTML = "City Loop ";
-                  mainDest = "City Loop ";
-                }
-
               }
               else
               {
@@ -251,24 +266,47 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
               // }
               else
               { 
-                document.getElementById('subServ0').innerHTML = 'Ltd Express';
+                if(isCityLoop(sub0DestinationStop) == true)
+                {
+                  document.getElementById('subServ0').innerHTML = 'Ltd Express Via Richmond';
+                }
+                else
+                {
+                  document.getElementById('subServ0').innerHTML = 'Ltd Express';
+                };
               };
 
             }).catch(console.error);
 
             ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [sub0DestinationStop], route_type: 0 });
             }).then(res => {
-  
+              
+              if(isCityLoop(sub0DestinationStop) == true)
+              {
+                document.getElementById('subTerm0').innerHTML = "City Loop";
+                sub0Dest = "City Loop ";
+              }
               if(res.body.stop.stop_name == "Parliament ")
               {
-                document.getElementById('subTerm0').innerHTML = "Flinders Street (p)";
+                document.getElementById('subTerm0').innerHTML = "Flinders Street ";
                 sub0Dest = "Flinders Street ";
               }
               else
               {
                 document.getElementById('subTerm0').innerHTML = res.body.stop.stop_name;
                 sub0Dest = res.body.stop.stop_name;
-              };              
+              };
+
+              // if(res.body.stop.stop_name == "Parliament ")
+              // {
+              //   document.getElementById('subTerm0').innerHTML = "Flinders Street (p)";
+              //   sub0Dest = "Flinders Street ";
+              // }
+              // else
+              // {
+              //   document.getElementById('subTerm0').innerHTML = res.body.stop.stop_name;
+              //   sub0Dest = res.body.stop.stop_name;
+              // };              
               //console.log("finalDestinationName = " + res.body.stop.stop_name)
     
             }).catch(console.error);
@@ -331,7 +369,14 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
           // }
           else
           { 
-            document.getElementById('subServ1').innerHTML = 'Ltd Express';
+            if(isCityLoop(sub1DestinationStop) == true)
+            {
+              document.getElementById('subServ1').innerHTML = 'Ltd Express Via Richmond';
+            }
+            else
+            {
+              document.getElementById('subServ1').innerHTML = 'Ltd Express';
+            };
           };
   
           }).catch(console.error);
@@ -339,16 +384,32 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
             ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [sub1DestinationStop], route_type: 0 });
             }).then(res => {
   
+              if(isCityLoop(sub1DestinationStop) == true)
+              {
+                document.getElementById('subTerm1').innerHTML = "City Loop";
+                sub1Dest = "City Loop ";
+              }
               if(res.body.stop.stop_name == "Parliament ")
               {
-                document.getElementById('subTerm1').innerHTML = "Flinders Street (p)";
+                document.getElementById('subTerm1').innerHTML = "Flinders Street ";
                 sub1Dest = "Flinders Street ";
               }
               else
               {
                 document.getElementById('subTerm1').innerHTML = res.body.stop.stop_name;
                 sub1Dest = res.body.stop.stop_name;
-              };              
+              };
+
+              // if(res.body.stop.stop_name == "Parliament ")
+              // {
+              //   document.getElementById('subTerm1').innerHTML = "Flinders Street (p)";
+              //   sub1Dest = "Flinders Street ";
+              // }
+              // else
+              // {
+              //   document.getElementById('subTerm1').innerHTML = res.body.stop.stop_name;
+              //   sub1Dest = res.body.stop.stop_name;
+              // };              
               //console.log("finalDestinationName = " + res.body.stop.stop_name)
     
             }).catch(console.error);
@@ -410,24 +471,47 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
               // }
               else
               { 
-                document.getElementById('subServ2').innerHTML = 'Ltd Express';
+                if(isCityLoop(sub2DestinationStop) == true)
+                {
+                  document.getElementById('subServ2').innerHTML = 'Ltd Express Via Richmond';
+                }
+                else
+                {
+                  document.getElementById('subServ2').innerHTML = 'Ltd Express';
+                };
               };
 
             }).catch(console.error);
 
             ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [sub2DestinationStop], route_type: 0 });
             }).then(res => {
-  
+              
+              if(isCityLoop(sub2DestinationStop) == true)
+              {
+                document.getElementById('subTerm2').innerHTML = "City Loop";
+                sub2Dest = "City Loop ";
+              }
               if(res.body.stop.stop_name == "Parliament ")
               {
-                document.getElementById('subTerm2').innerHTML = "Flinders Street (p)";
+                document.getElementById('subTerm2').innerHTML = "Flinders Street ";
                 sub2Dest = "Flinders Street ";
               }
               else
               {
                 document.getElementById('subTerm2').innerHTML = res.body.stop.stop_name;
                 sub2Dest = res.body.stop.stop_name;
-              };              
+              };
+
+              // if(res.body.stop.stop_name == "Parliament ")
+              // {
+              //   document.getElementById('subTerm2').innerHTML = "Flinders Street (p)";
+              //   sub2Dest = "Flinders Street ";
+              // }
+              // else
+              // {
+              //   document.getElementById('subTerm2').innerHTML = res.body.stop.stop_name;
+              //   sub2Dest = res.body.stop.stop_name;
+              // };              
               //console.log("finalDestinationName = " + res.body.stop.stop_name)
     
             }).catch(console.error);
