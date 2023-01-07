@@ -81,11 +81,11 @@ font-size: 2vw;
 {
     width:100%;
     text-align: Left;
-    /* margin-top:-2.5vw; */
+    margin-top:-0.75vw;
     /* margin-bottom: 0vw; */
     border-collapse: collapse;
     border-bottom: solid 1px white;
-    height:25%;
+    height:27.5%;
 }
 
 /* Old CSS Formatting */
@@ -161,14 +161,14 @@ font-size: 2vw;
 
 #mainDepartureHeading
 {
-  font-size: 25%;
+  font-size: 50%;
   vertical-align:bottom;
 }
 
 #mainETD, #mainSTD
 {
-  font-size: 75%;
-  vertical-align:top;
+  font-size: 100%;
+  vertical-align: top;
 }
 
 #futuretrainDestMain

@@ -1,8 +1,18 @@
 console.log('Custom Javascript Loaded');
-const userStation = 1016 //prompt("Station Id", 1016);
-const userPlatform = 1 //prompt("Platform Number", 1);
+var userStation = 1016 //prompt("Station Id", 1016);
+var userPlatform = 1 //prompt("Platform Number", 1);
 
-//file version 108.a
+//file version 112.a
+
+const urlQuery = window.location.search
+const splitUrlQuery = urlQuery.split("/")
+if(splitUrlQuery[0] == "?data")
+{
+  userPlatform = splitUrlQuery[2]
+  userStation = splitUrlQuery[1]
+}
+
+// console.log(`${urlQuery}\n${splitUrlQuery}\n${urlStation}\n${urlPlatform}`)
 
 function date_toTime(date) // Converts "YYYY-MM-DDTHH:MM:SSZ" to "HH:MM" (plus 24 to 12h time) 
 {
@@ -121,7 +131,7 @@ setInterval(() => {
   document.getElementById('time').innerHTML = time;
 
    // Main Departure Destination
-  ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
+  ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
     mainDeparturePlatform = res.body.departures[0].platform_number;
     mainDepartureDest = res.body.departures[0].direction_id;
@@ -132,7 +142,7 @@ setInterval(() => {
   
     var mainDepartureEstiTime = new Date(res.body.departures[0].estimated_departure_utc);    
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
     }).then(res => {
       if(res.body.departures[0].at_platform == true)
       {
@@ -218,7 +228,7 @@ setInterval(() => {
 
 
 // Sub0 Departure Destination
-ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
+ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
 }).then(res => {
   
     sub0DepartureRunRef = res.body.departures[1].run_ref;
@@ -232,7 +242,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
     //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
     
     //console.log(res.body.departures[0].at_platform)
@@ -319,7 +329,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
 
 // Sub1 Departure Destination
-ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
+ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
 }).then(res => {
   
     sub1DepartureRunRef = res.body.departures[2].run_ref;
@@ -333,7 +343,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
     //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
     
     //console.log(res.body.departures[0].at_platform)
@@ -422,7 +432,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
 
 // Sub2 Departure Destination
-ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
+ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
 }).then(res => {
   
     sub2DepartureRunRef = res.body.departures[3].run_ref;
@@ -436,7 +446,7 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
     //console.log("mainETD   = " + date_toUntil(mainDepartureEstiTime));
     
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: 1016, max_results: 4, platform_numbers: [userPlatform] });
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
     
     //console.log(res.body.departures[0].at_platform)
