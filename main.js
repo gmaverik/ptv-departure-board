@@ -1,8 +1,9 @@
 console.log('Custom Javascript Loaded');
+// console.log(test);
 var userStation = 1016 //prompt("Station Id", 1016);
 var userPlatform = 1 //prompt("Platform Number", 1);
 
-//file version 114.a
+//file version 115.a
 
 const urlQuery = window.location.search
 const splitUrlQuery = urlQuery.split("/")

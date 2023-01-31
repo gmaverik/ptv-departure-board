@@ -28095,10 +28095,11 @@ function config (name) {
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],193:[function(require,module,exports){
 console.log('Custom Javascript Loaded');
+console.log(test);
 var userStation = 1016 //prompt("Station Id", 1016);
 var userPlatform = 1 //prompt("Platform Number", 1);
 
-//file version 112.a
+//file version 114.a
 
 const urlQuery = window.location.search
 const splitUrlQuery = urlQuery.split("/")

@@ -20,5 +20,76 @@ var stationNames = {
     1059 : 'East Richmond',
     1162 : 'Richmond',
     1071 : 'Flinders Street',
+}
+
+var test = "I sure hope this works";
+
+// Train Line Stopping list
+
+var alameinLine = {
+
+}
+
+var belgraveLine = {
+
+}
+
+var craigieburnLine = {
+
+}
+
+var cranbourneLine = {
+
+}
+
+var frankstonLine = {
+
+}
+
+var glenWaverlyLine = {
+
+}
+
+var hurstbridgeLine = {
+
+}
+
+var lilydaleLine = {
+
+}
+
+var merndaLine = {
+
+}
+
+var pakenhamLine = {
+
+}
+
+var sandringhamLine = {
+
+}
+
+var showgroundsRacecourseLine = {
+
+}
+
+var stonyPointLine = {
+
+}
+
+var sunburyLine = {
+
+}
+
+var upfieldLine = {
+
+}
+
+var werribeeLine = {
+
+}
+
+var williamstownLine = {
 
 }
