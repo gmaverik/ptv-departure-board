@@ -116,6 +116,7 @@ var mainDest;
 let a;
 let time;
 var terminus = false;
+var line_name;
 ptvClient = ptv(devId, apiKey);
 
 // console.log(stops[1012]);
@@ -137,6 +138,46 @@ setInterval(() => {
     mainDeparturePlatform = res.body.departures[0].platform_number;
     mainDepartureDest = res.body.departures[0].direction_id;
     mainDepartureRunRef = res.body.departures[0].run_ref;
+    line_id = res.body.departures[0].route_id; // Which line it runs on
+    console.log(line_id);
+
+    switch(line_id) {
+      case 1: line_name = "alameinLine";
+        break;
+      case 2: line_name = "belgraveLine";
+        break;
+      case 3: line_name = "craigieburnLine";
+        break;
+      case 4: line_name = "cranbourneLine";
+        break;
+      case 5: line_name = "merndaLine";
+        break;
+      case 6: line_name = "frankstonLine";
+        break;
+      case 7: line_name = "glenWaverlyLine";
+        break;
+      case 8: line_name = "hurstbridgeLine";
+        break;
+      case 9: line_name = "lilydaleLine";
+        break;
+      case 11: line_name = "pakenhamLine";
+        break;  
+      case 12: line_name = "sandringhamLine";
+        break;
+      case 13: line_name = "stonyPointLine";
+        break;
+      case 14: line_name = "sunburyLine";
+        break;
+      case 15: line_name = "upfieldLine";
+        break;
+      case 16: line_name = "werribeeLine";
+        break;
+      case 17: line_name = "williamstownLine";
+        break;
+      case 1482: line_name = "showgroundsRacecourseLine";
+        break;
+    }
+
 
     var mainSTD = new Date(res.body.departures[0].scheduled_departure_utc);
     document.getElementById('mainSTD').innerHTML = date_toTime(mainSTD);
@@ -174,6 +215,7 @@ setInterval(() => {
                   stopsArray.push(depArray[0][i].stop_id);
               };
               // console.log(stopsArray[stopsArray.length-1])
+              console.log(line_name);
 
               clearDepartureBoard();
               arrayIncludeDisplay(1092, 0); // Heathmont
