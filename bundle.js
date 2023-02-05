@@ -28213,9 +28213,11 @@ let a;
 let time;
 var terminus = false;
 var line_name;
+var stopping_list = [];
 ptvClient = ptv(devId, apiKey);
 
 // console.log(stops[1012]);
+// console.log(alameinLine);
 
 setInterval(() => {
 
@@ -28238,42 +28240,43 @@ setInterval(() => {
     console.log(line_id);
 
     switch(line_id) {
-      case 1: line_name = "alameinLine";
+      case 1: line_name = "alameinLine"; stopping_list = alameinLine;
         break;
-      case 2: line_name = "belgraveLine";
+      case 2: line_name = "belgraveLine"; stopping_list = belgraveLine;
         break;
-      case 3: line_name = "craigieburnLine";
+      case 3: line_name = "craigieburnLine"; stopping_list = craigieburnLine;
         break;
-      case 4: line_name = "cranbourneLine";
+      case 4: line_name = "cranbourneLine"; stopping_list = cranbourneLine;
         break;
-      case 5: line_name = "merndaLine";
+      case 5: line_name = "merndaLine"; stopping_list = merndaLine;
         break;
-      case 6: line_name = "frankstonLine";
+      case 6: line_name = "frankstonLine"; stopping_list = frankstonLine;
         break;
-      case 7: line_name = "glenWaverlyLine";
+      case 7: line_name = "glenWaverlyLine"; stopping_list = glenWaverlyLine;
         break;
-      case 8: line_name = "hurstbridgeLine";
+      case 8: line_name = "hurstbridgeLine"; stopping_list = hurstbridgeLine;
         break;
-      case 9: line_name = "lilydaleLine";
+      case 9: line_name = "lilydaleLine"; stopping_list = lilydaleLine;
         break;
-      case 11: line_name = "pakenhamLine";
+      case 11: line_name = "pakenhamLine"; stopping_list = pakenhamLine;
         break;  
-      case 12: line_name = "sandringhamLine";
+      case 12: line_name = "sandringhamLine"; stopping_list = sandringhamLine;
         break;
-      case 13: line_name = "stonyPointLine";
+      case 13: line_name = "stonyPointLine"; stopping_list = stonyPointLine;
         break;
-      case 14: line_name = "sunburyLine";
+      case 14: line_name = "sunburyLine"; stopping_list = sunburyLine;
         break;
-      case 15: line_name = "upfieldLine";
+      case 15: line_name = "upfieldLine"; stopping_list = upfieldLine;
         break;
-      case 16: line_name = "werribeeLine";
+      case 16: line_name = "werribeeLine"; stopping_list = werribeeLine;
         break;
-      case 17: line_name = "williamstownLine";
+      case 17: line_name = "williamstownLine"; stopping_list = williamstownLine;
         break;
-      case 1482: line_name = "showgroundsRacecourseLine";
+      case 1482: line_name = "showgroundsRacecourseLine"; stopping_list = showgroundsRacecourseLine;
         break;
     }
 
+    // console.log(line_name);
 
     var mainSTD = new Date(res.body.departures[0].scheduled_departure_utc);
     document.getElementById('mainSTD').innerHTML = date_toTime(mainSTD);
@@ -28311,7 +28314,9 @@ setInterval(() => {
                   stopsArray.push(depArray[0][i].stop_id);
               };
               // console.log(stopsArray[stopsArray.length-1])
-              console.log(line_name);
+              // console.log(stationNames);
+              // stopping_list = line_name
+              console.log(stopping_list)
 
               clearDepartureBoard();
               arrayIncludeDisplay(1092, 0); // Heathmont
