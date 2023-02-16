@@ -28237,7 +28237,7 @@ setInterval(() => {
     mainDepartureDest = res.body.departures[0].direction_id;
     mainDepartureRunRef = res.body.departures[0].run_ref;
     line_id = res.body.departures[0].route_id; // Which line it runs on
-    console.log(line_id);
+    // console.log(line_id);
 
     switch(line_id) {
       case 1: line_name = "alameinLine"; stopping_list = alameinLine;
@@ -28300,7 +28300,7 @@ setInterval(() => {
       destinationStop = res.body.departures[res.body.departures.length-1].stop_id;
             
             // console.log(mainDest);
-            console.log(destinationStop);
+            // console.log(destinationStop);
 
             ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepartureRunRef], route_type: 0,  });
             }).then(res => {
@@ -28316,7 +28316,28 @@ setInterval(() => {
               // console.log(stopsArray[stopsArray.length-1])
               // console.log(stationNames);
               // stopping_list = line_name
+              // console.log(stopping_list);
+              // console.log(userStation);
+
               console.log(stopping_list)
+
+              for (let j = 0; j > stopping_list.length; j++) { 
+                // if(stopping_list[j].stationId == userStation)
+                // {
+                //   console.log("yup");
+                //   break;
+                // }
+                // else
+                // {
+                //   console.log("nup");
+                //   continue;
+                // }
+                console.log(j);
+              }
+
+
+              // console.log(stopping_list[6].stationId == userStation);
+
 
               clearDepartureBoard();
               arrayIncludeDisplay(1092, 0); // Heathmont
