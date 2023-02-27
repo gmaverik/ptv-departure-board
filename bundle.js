@@ -28136,7 +28136,7 @@ function date_toUntil(date, schedTime)  // Gives an estimate for departure time
   return Math.ceil(difference / 60000);
 };
 
-function arrayIncludeDisplay(stopId, iterator) // Departure Stop List fill function 
+function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List fill function 
 {
   if(terminus != true)
   {
@@ -28144,7 +28144,7 @@ function arrayIncludeDisplay(stopId, iterator) // Departure Stop List fill funct
     {
       if(stopsArray.includes(stopId) == true)
       {
-        document.getElementById('stopList'+ iterator).innerHTML = stationNames[stopId];
+        document.getElementById('stopList'+ iterator).innerHTML = stopName;
         document.getElementById('stopList'+ iterator).style.fontSize = "100%";
       }
       else 
@@ -28159,7 +28159,7 @@ function arrayIncludeDisplay(stopId, iterator) // Departure Stop List fill funct
       if(iterator >= 10) iterator += 2;
       if(stopsArray.includes(stopId) == true)
       {
-        document.getElementById('stopList'+ iterator).innerHTML = stationNames[stopId];
+        document.getElementById('stopList'+ iterator).innerHTML = stopName;
         document.getElementById('stopList'+ iterator).style.fontSize = "150%";
       }
       else 
@@ -28214,6 +28214,11 @@ let time;
 var terminus = false;
 var line_name;
 var stopping_list = [];
+var depArray = [];
+var directionId;
+var directionName;
+var stationArrayIndex;
+var stoppingListArray = new Array();
 ptvClient = ptv(devId, apiKey);
 
 // console.log(stops[1012]);
@@ -28237,6 +28242,8 @@ setInterval(() => {
     mainDepartureDest = res.body.departures[0].direction_id;
     mainDepartureRunRef = res.body.departures[0].run_ref;
     line_id = res.body.departures[0].route_id; // Which line it runs on
+    // console.log(res.body.departures[0].route_id)
+
     // console.log(line_id);
 
     switch(line_id) {
@@ -28305,62 +28312,105 @@ setInterval(() => {
             ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepartureRunRef], route_type: 0,  });
             }).then(res => {
   
-              var depArray = [];
-              var depArray = [res.body.departures];
+              depArray = [res.body.departures];
               depArray.sort(function(a, b){return a.departure_sequence - b.departure_sequence});
               stopsArray.length = 0;
+              stoppingListArray.length = 0;
               for (let i = 0; i < depArray[0].length; i++) 
               {
                   stopsArray.push(depArray[0][i].stop_id);
               };
+              directionId = res.body.departures[0].direction_id
+              // console.log(directionId);
+              if(directionId == 1)
+              {
+                directionName = "up";
+              }
+              else
+              {
+                directionName = "down";
+              }
+              // console.log("The user direction is: " + directionName)
               // console.log(stopsArray[stopsArray.length-1])
               // console.log(stationNames);
               // stopping_list = line_name
               // console.log(stopping_list);
               // console.log(userStation);
 
-              console.log(stopping_list)
+              // console.log(Object.keys(stopping_list).length)
 
-              for (let j = 0; j > stopping_list.length; j++) { 
-                // if(stopping_list[j].stationId == userStation)
-                // {
-                //   console.log("yup");
-                //   break;
-                // }
-                // else
-                // {
-                //   console.log("nup");
-                //   continue;
-                // }
-                console.log(j);
+              for (let j = 0; j < Object.keys(stopping_list).length; j++) { 
+                if(stopping_list[j].stationId == userStation)
+                {
+                  stationArrayIndex = j;
+                  // console.log("The user station is: " + stopping_list[j].stationName);
+                  break;
+                }
+                // console.log("The user station is located at array index: " + stationArrayIndex);
               }
+
+              // stoppingListArray.length = 0;
+              if(directionName == "up")
+              {
+                for (let k = stationArrayIndex + 1; k < Object.keys(stopping_list).length; k++) {
+                  stoppingListArray.push([stopping_list[k].stationId, stopping_list[k].stationName])
+                }
+              }
+              else if(directionName == "down")
+              {
+                // for (let k = stationArrayIndex - 1; k < Object.keys(stopping_list).length; k--) {
+                //   stoppingListArray.push([stopping_list[k].stationId, stopping_list[k].stationName])
+                // }
+                for (let m = stationArrayIndex - 1; m >= 0; m--) {
+                  stoppingListArray.push([stopping_list[m].stationId, stopping_list[m].stationName])
+                }
+                // for (let l = stationArrayIndex - 1; l < stationArrayIndex; l--) {
+                //   stoppingListArray.push([stopping_list[l].stationId, stopping_list[l].stationName])
+                // }
+                // console.log(line_id)
+                // console.log(line_name)
+                // console.log(stopping_list)
+              }
+
+              // console.log(stoppingListArray);
+
 
 
               // console.log(stopping_list[6].stationId == userStation);
 
 
               clearDepartureBoard();
-              arrayIncludeDisplay(1092, 0); // Heathmont
-              arrayIncludeDisplay(1163, 1); // Ringwood
-              arrayIncludeDisplay(1091, 2); // Heatherdale
-              arrayIncludeDisplay(1128, 3); // Mitcham
-              arrayIncludeDisplay(1148, 4); // Nunawading
-              arrayIncludeDisplay(1023, 5); // Blackburn
-              arrayIncludeDisplay(1111, 6); // Laburnum
-              arrayIncludeDisplay(1026, 7); // Box Hill
-              arrayIncludeDisplay(1129, 8); // Mont Albert
-              arrayIncludeDisplay(1189, 9); // Surrey Hills
-              arrayIncludeDisplay(1037, 10); // Chatham
-              arrayIncludeDisplay(1033, 11); // Canterbury
-              arrayIncludeDisplay(1057, 12); // East Camberwell
-              arrayIncludeDisplay(1032, 13); // Camberwell
-              arrayIncludeDisplay(1012, 14); // Auburn
-              arrayIncludeDisplay(1080, 15); // Glenferrie
-              arrayIncludeDisplay(1090, 16); // Hawthorn
-              arrayIncludeDisplay(1030, 17); // Burnley
-              arrayIncludeDisplay(1059, 18); // East Richmond
-              arrayIncludeDisplay(1162, 19); // Richmond
-              arrayIncludeDisplay(1071, 20); // Flinders Street
+              // console.log(stoppingListArray.length)
+              for (let o = 0; o < stoppingListArray.length; o++) {
+                fixedArray = stoppingListArray[o]
+                arrayIncludeDisplay(fixedArray[0], fixedArray[1], o)
+                // console.log(o)
+                console.log("iterator: " + o)
+                // console.log("id: " + stoppingListArray[o])
+                console.log(fixedArray[0])
+                // console.log("name: " + stoppingListArray[m].stationName)
+              }
+              // arrayIncludeDisplay(1092, 0); // Heathmont
+              // arrayIncludeDisplay(1163, 1); // Ringwood
+              // arrayIncludeDisplay(1091, 2); // Heatherdale
+              // arrayIncludeDisplay(1128, 3); // Mitcham
+              // arrayIncludeDisplay(1148, 4); // Nunawading
+              // arrayIncludeDisplay(1023, 5); // Blackburn
+              // arrayIncludeDisplay(1111, 6); // Laburnum
+              // arrayIncludeDisplay(1026, 7); // Box Hill
+              // arrayIncludeDisplay(1129, 8); // Mont Albert
+              // arrayIncludeDisplay(1189, 9); // Surrey Hills
+              // arrayIncludeDisplay(1037, 10); // Chatham
+              // arrayIncludeDisplay(1033, 11); // Canterbury
+              // arrayIncludeDisplay(1057, 12); // East Camberwell
+              // arrayIncludeDisplay(1032, 13); // Camberwell
+              // arrayIncludeDisplay(1012, 14); // Auburn
+              // arrayIncludeDisplay(1080, 15); // Glenferrie
+              // arrayIncludeDisplay(1090, 16); // Hawthorn
+              // arrayIncludeDisplay(1030, 17); // Burnley
+              // arrayIncludeDisplay(1059, 18); // East Richmond
+              // arrayIncludeDisplay(1162, 19); // Richmond
+              // arrayIncludeDisplay(1071, 20); // Flinders Street
 
               ptvClient.then(apis => { return apis.Stops.Stops_StopDetails({ stop_id: [destinationStop], route_type: 0 });
             }).then(res => {
@@ -28381,6 +28431,7 @@ setInterval(() => {
                 document.getElementById('mainTerm').innerHTML = res.body.stop.stop_name;
                 mainDest = res.body.stop.stop_name;
               };
+              // console.log(mainDest);
     
             }).catch(console.error);
 
