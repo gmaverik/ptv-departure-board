@@ -181,7 +181,11 @@ var sandringhamLine = {
 }
 
 var showgroundsRacecourseLine = {
-
+    0 : {stationName : 'Flemington Racecourse', stationId : 1070},
+    1 : {stationName : 'Showgrounds', stationId : 1177},
+    2 : {stationName : 'North Melbourne', stationId : 1144},
+    3 : {stationName : 'Southern Cross', stationId : 1181},
+    4 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
 var stonyPointLine = {
