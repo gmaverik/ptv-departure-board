@@ -20,6 +20,11 @@ font-size: 2vw;
   background-color: aquamarine; /* Just to show the bounding box */
 }
 
+#licence
+{
+  font-size: 50%;
+}
+
 #secondaryDeparturesMain
 {
   float:left;
