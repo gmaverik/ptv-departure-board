@@ -210,7 +210,23 @@ var upfieldLine = {
 }
 
 var werribeeLine = {
-
+    0 : {stationName : 'Werribee', stationId : 1205},
+    1 : {stationName : 'Hoppers Crossing', stationId : 1097},
+    2 : {stationName : 'Williams Landing', stationId : 1225},
+    3 : {stationName : 'Aircraft', stationId : 1220},
+    4 : {stationName : 'Laverton', stationId : 1113},
+    5 : {stationName : 'Westona', stationId : 1210},
+    6 : {stationName : 'Altona', stationId : 1005},
+    7 : {stationName : 'Seaholme', stationId : 1175},
+    8 : {stationName : 'Newport', stationId : 1141},
+    9 : {stationName : 'Spotswood', stationId : 1182},
+    10 : {stationName : 'Yarraville', stationId : 1216},
+    11 : {stationName : 'Seddon', stationId : 1176},
+    12 : {stationName : 'Footscray', stationId : 1072},
+    13 : {stationName : 'South Kensington', stationId : 1179},
+    14 : {stationName : 'North Melbourne', stationId : 1144},
+    15 : {stationName : 'Southern Cross', stationId : 1181},
+    16 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
 var williamstownLine = {
