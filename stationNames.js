@@ -189,7 +189,16 @@ var showgroundsRacecourseLine = {
 }
 
 var stonyPointLine = {
-
+    0 : {stationName : 'Stony Point', stationId : 1185},
+    0 : {stationName : 'Crib Point', stationId : 1046},
+    0 : {stationName : 'Morradoo', stationId : 1136},
+    0 : {stationName : 'Bittern', stationId : 1022},
+    0 : {stationName : 'Hastings', stationId : 1088},
+    0 : {stationName : 'Tyabb', stationId : 1197},
+    0 : {stationName : 'Somerville', stationId : 1178},
+    0 : {stationName : 'Baxter', stationId : 1015},
+    0 : {stationName : 'Leawarra', stationId : 1114},
+    0 : {stationName : 'Frankston', stationId : 1073},
 }
 
 var sunburyLine = {
