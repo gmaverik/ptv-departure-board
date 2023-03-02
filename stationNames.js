@@ -189,7 +189,7 @@ var stonyPointLine = {
 }
 
 var sunburyLine = {
-
+    
 }
 
 var upfieldLine = {
@@ -201,5 +201,18 @@ var werribeeLine = {
 }
 
 var williamstownLine = {
-
+    0 : {stationName : 'Williamstown', stationId : 1211},
+    1 : {stationName : 'Williamstown Beach', stationId : 1212},
+    2 : {stationName : 'North Williamstown', stationId : 1146},
+    3 : {stationName : 'Newport', stationId : 1141},
+    4 : {stationName : 'Spotswood', stationId : 1182},
+    5 : {stationName : 'Yarraville', stationId : 1216},
+    6 : {stationName : 'Seddon', stationId : 1176},
+    7 : {stationName : 'Footscray', stationId : 1072},
+    8 : {stationName : 'South Kensington', stationId : 1179},
+    9 : {stationName : 'North Melbourne', stationId : 1144},
+    10 : {stationName : 'Southern Cross', stationId : 1181},
+    11 : {stationName : 'Flinders Street', stationId : 1071},
 }
+
+//    0 : {stationName : '', stationId : },
