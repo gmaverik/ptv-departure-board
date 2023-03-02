@@ -164,7 +164,20 @@ var pakenhamLine = {
 }
 
 var sandringhamLine = {
-
+    0 : {stationName : 'Sandringham', stationId : 1173},
+    1 : {stationName : 'Hampton', stationId : 1086},
+    2 : {stationName : 'Brighton Beach', stationId : 1027},
+    3 : {stationName : 'Middle Brighton', stationId : 1126},
+    4 : {stationName : 'North Brighton', stationId : 1143},
+    5 : {stationName : 'Gardenvale', stationId : 1074},
+    6 : {stationName : 'Elsternwick', stationId : 1061},
+    7 : {stationName : 'Ripponlea', stationId : 1165},
+    8 : {stationName : 'Balaclava', stationId : 1013},
+    9 : {stationName : 'Windsor', stationId : 1214},
+    10 : {stationName : 'Prahran', stationId : 1158},
+    11 : {stationName : 'South Yarra', stationId : 1180},
+    12 : {stationName : 'Richmond', stationId : 1162},
+    13 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
 var showgroundsRacecourseLine = {
