@@ -202,7 +202,22 @@ var stonyPointLine = {
 }
 
 var sunburyLine = {
-    
+    0 : {stationName : 'Sunbury', stationId : 1187},
+    1 : {stationName : 'Diggers Rest', stationId : 1055},
+    2 : {stationName : 'Watergardens', stationId : 1202},
+    3 : {stationName : 'Keilor Plains', stationId : 1107},
+    4 : {stationName : 'St Albans', stationId : 1184},
+    5 : {stationName : 'Ginifer', stationId : 1076},
+    6 : {stationName : 'Albion', stationId : 1003},
+    7 : {stationName : 'Sunshine', stationId : 1218},
+    8 : {stationName : 'Tottenham', stationId : 1196},
+    9 : {stationName : 'West Footscray', stationId : 1206},
+    10 : {stationName : 'Middle Footscray', stationId : 1127},
+    11 : {stationName : 'Footscray', stationId : 1072},
+    12 : {stationName : 'South Kensington', stationId : 1179},
+    13 : {stationName : 'North Melbourne', stationId : 1144},
+    14 : {stationName : 'Southern Cross', stationId : 1181},
+    15 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
 var upfieldLine = {
