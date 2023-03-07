@@ -206,7 +206,22 @@ var sunburyLine = {
 }
 
 var upfieldLine = {
-
+    0 : {stationName : 'Upfield', stationId : 1198},
+    1 : {stationName : 'Gowrie', stationId : 1083},
+    2 : {stationName : 'Fawkner', stationId : 1066},
+    3 : {stationName : 'Merlynston', stationId : 1124},
+    4 : {stationName : 'Batman', stationId : 1014},
+    5 : {stationName : 'Coburg', stationId : 1042},
+    6 : {stationName : 'Moreland', stationId : 1135},
+    7 : {stationName : 'Anstey', stationId : 1006},
+    8 : {stationName : 'Brunswick', stationId : 1029},
+    9 : {stationName : 'Jewell', stationId : 1103},
+    10 : {stationName : 'Royal Park', stationId : 1169},
+    11 : {stationName : 'Flemington Bridge', stationId : 1069},
+    12 : {stationName : 'Macaulay', stationId : 1116},
+    13 : {stationName : 'North Melbourne', stationId : 1144},
+    14 : {stationName : 'Southern Cross', stationId : 1181},
+    15 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
 var werribeeLine = {
