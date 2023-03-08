@@ -47,7 +47,25 @@ var belgraveLine = {
 }
 
 var craigieburnLine = {
-
+    0 : {stationName : 'Craigieburn', stationId : 1044},
+    1 : {stationName : 'Roxburgh Park', stationId : 1219},
+    2 : {stationName : 'Coolaroo', stationId : 1221},
+    3 : {stationName : 'Broadmeadows', stationId : 1028},
+    4 : {stationName : 'Jacana', stationId : 1102},
+    5 : {stationName : 'Glenroy', stationId : 1082},
+    6 : {stationName : 'Oak Park', stationId : 1149},
+    7 : {stationName : 'Pascoe Vale', stationId : 1156},
+    8 : {stationName : 'Strathmore', stationId : 1186},
+    9 : {stationName : 'Glenbervie', stationId : 1079},
+    10 : {stationName : 'Essendon', stationId : 1064},
+    11 : {stationName : 'Moonee Ponds', stationId : 1131},
+    12 : {stationName : 'Ascot Vale', stationId : 1009},
+    13 : {stationName : 'Newmarket', stationId : 1140},
+    14 : {stationName : 'Kensington', stationId : 1108},
+    15 : {stationName : 'North Melbourne', stationId : 1144},
+    16 : {stationName : 'Southern Cross', stationId : 1181},
+    17 : {stationName : 'Flinders Street', stationId : 1071},
+    
 }
 
 var cranbourneLine = {
