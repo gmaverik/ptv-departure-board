@@ -65,11 +65,32 @@ var craigieburnLine = {
     15 : {stationName : 'North Melbourne', stationId : 1144},
     16 : {stationName : 'Southern Cross', stationId : 1181},
     17 : {stationName : 'Flinders Street', stationId : 1071},
-    
 }
 
 var cranbourneLine = {
-
+    0 : {stationName : 'Cranbourne', stationId : 1045},
+    1 : {stationName : 'Merinda Park', stationId : 1123},
+    2 : {stationName : 'Lynbrook', stationId : 1222},
+    3 : {stationName : 'Dandenong', stationId : 1049},
+    4 : {stationName : 'Yarraman', stationId : 1215},
+    5 : {stationName : 'Noble Park', stationId : 1142},
+    6 : {stationName : 'Sandown Park', stationId : 1172},
+    7 : {stationName : 'Springvale', stationId : 1183},
+    8 : {stationName : 'Westall', stationId : 1208},
+    9 : {stationName : 'Clayton', stationId : 1040},
+    10 : {stationName : 'Huntingdale', stationId : 1099},
+    11 : {stationName : 'Oakleigh', stationId : 1150},
+    12 : {stationName : 'Hughesdale', stationId : 1098},
+    13 : {stationName : 'Murrumbeena', stationId : 1138},
+    14 : {stationName : 'Carnegie', stationId : 1034},
+    15 : {stationName : 'Caulfield', stationId : 1036},
+    16 : {stationName : 'Malvern', stationId : 1118},
+    17 : {stationName : 'Armadale', stationId : 1008},
+    18 : {stationName : 'Toorak', stationId : 1194},
+    19 : {stationName : 'Hawksburn', stationId : 1089},
+    20 : {stationName : 'South Yarra', stationId : 1180},
+    21 : {stationName : 'Richmond', stationId : 1162},
+    22 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
 var frankstonLine = {
