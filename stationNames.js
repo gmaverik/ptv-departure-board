@@ -199,7 +199,33 @@ var merndaLine = {
 }
 
 var pakenhamLine = {
-
+    0 : {stationName : 'Pakenham', stationId : 1153},
+    1 : {stationName : 'Cardinia Road', stationId : 1223},
+    2 : {stationName : 'Officer', stationId : 1151},
+    3 : {stationName : 'Beaconsfield', stationId : 1017},
+    4 : {stationName : 'Berwick', stationId : 1021},
+    5 : {stationName : 'Narre Warren', stationId : 1139},
+    6 : {stationName : 'Hallam', stationId : 1085},
+    7 : {stationName : 'Dandenong', stationId : 1049},
+    8 : {stationName : 'Yarraman', stationId : 1215},
+    9 : {stationName : 'Noble Park', stationId : 1142},
+    10 : {stationName : 'Sandown Park', stationId : 1172},
+    11 : {stationName : 'Springvale', stationId : 1183},
+    12 : {stationName : 'Westall', stationId : 1208},
+    13 : {stationName : 'Clayton', stationId : 1040},
+    14 : {stationName : 'Huntingdale', stationId : 1099},
+    15 : {stationName : 'Oakleigh', stationId : 1150},
+    16 : {stationName : 'Hughesdale', stationId : 1098},
+    17 : {stationName : 'Murrumbeena', stationId : 1138},
+    18 : {stationName : 'Carnegie', stationId : 1034},
+    19 : {stationName : 'Caulfield', stationId : 1036},
+    20 : {stationName : 'Malvern', stationId : 1118},
+    21 : {stationName : 'Armadale', stationId : 1008},
+    22 : {stationName : 'Toorak', stationId : 1194},
+    23 : {stationName : 'Hawksburn', stationId : 1089},
+    24 : {stationName : 'South Yarra', stationId : 1180},
+    25 : {stationName : 'Richmond', stationId : 1162},
+    26 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
 var sandringhamLine = {
