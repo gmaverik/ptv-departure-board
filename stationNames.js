@@ -1,4 +1,12 @@
-var alameinLine = {
+// This file contains the complete list of every railway station in Victoria served by Metro trains Melbourne
+// it also contains each stations unique id number (1xxx) and are all listed in stopping order
+
+// new line template;
+//    0 : {stationName : '', stationId : },
+
+// up to date as of 9th of March 2023
+
+var alameinLine = {     // 14 stops
     0 : {stationName : 'Alamein', stationId : 1002},
     1 : {stationName : 'Ashburton', stationId : 1010},
     2 : {stationName : 'Burwood', stationId : 1031},
@@ -15,7 +23,7 @@ var alameinLine = {
     13 : {stationName : 'Flinders Street', stationId : 1071}
 }
 
-var belgraveLine = {
+var belgraveLine = {    // 27 stops
     0 : {stationName : 'Belgrave', stationId : 1018},
     1 : {stationName : 'Tecoma', stationId : 1191},
     2 : {stationName : 'Upwey', stationId : 1200},
@@ -31,8 +39,8 @@ var belgraveLine = {
     12 : {stationName : 'Blackburn', stationId : 1023},
     13 : {stationName : 'Laburnum', stationId : 1111},
     14 : {stationName : 'Box Hill', stationId : 1026},
-    15 : {stationName : 'Mont Albert', stationId : 1129},
-    16 : {stationName : 'Surrey Hills', stationId : 1189},
+    15 : {stationName : 'Mont Albert', stationId : 1129},       // Mont albert station and Surrey Hills station are being
+    16 : {stationName : 'Surrey Hills', stationId : 1189},      // demolished and replaced by a single new station 'Union'
     17 : {stationName : 'Chatham', stationId : 1037},
     18 : {stationName : 'Canterbury', stationId : 1033},
     19 : {stationName : 'East Camberwell', stationId : 1057},
@@ -46,7 +54,7 @@ var belgraveLine = {
     26 : {stationName : 'Flinders Street', stationId : 1071}
 }
 
-var craigieburnLine = {
+var craigieburnLine = { // 18 stops
     0 : {stationName : 'Craigieburn', stationId : 1044},
     1 : {stationName : 'Roxburgh Park', stationId : 1219},
     2 : {stationName : 'Coolaroo', stationId : 1221},
@@ -67,7 +75,7 @@ var craigieburnLine = {
     17 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var cranbourneLine = {
+var cranbourneLine = {  // 23 stops
     0 : {stationName : 'Cranbourne', stationId : 1045},
     1 : {stationName : 'Merinda Park', stationId : 1123},
     2 : {stationName : 'Lynbrook', stationId : 1222},
@@ -93,11 +101,38 @@ var cranbourneLine = {
     22 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var frankstonLine = {
-
+var frankstonLine = {   // 28 stops
+    0 : {stationName : 'Frankston', stationId : 1073},
+    1 : {stationName : 'Kananook', stationId : 1106},
+    2 : {stationName : 'Seaford', stationId : 1174},
+    3 : {stationName : 'Carrum', stationId : 1035},
+    4 : {stationName : 'Bonbeach', stationId : 1024},
+    5 : {stationName : 'Chelsea', stationId : 1038},
+    6 : {stationName : 'Edithvale', stationId : 1060},
+    7 : {stationName : 'Aspendale', stationId : 1011},
+    8 : {stationName : 'Mordialloc', stationId : 1134},
+    9 : {stationName : 'Parkdale', stationId : 1154},
+    10 : {stationName : 'Mentone', stationId : 1122},
+    11 : {stationName : 'Cheltenham', stationId : 1039},
+    12 : {stationName : 'Southland', stationId : 1001},
+    13 : {stationName : 'Highett', stationId : 1095},
+    14 : {stationName : 'Moorabbin', stationId : 1132},
+    15 : {stationName : 'Patterson', stationId : 1157},
+    16 : {stationName : 'Bentleigh', stationId : 1020},
+    17 : {stationName : 'McKinnon', stationId : 1119},
+    18 : {stationName : 'Ormond', stationId : 1152},
+    19 : {stationName : 'Glenhuntly', stationId : 1081},
+    20 : {stationName : 'Caulfield', stationId : 1036},
+    21 : {stationName : 'Malvern', stationId : 1118},
+    22 : {stationName : 'Armadale', stationId : 1008},
+    23 : {stationName : 'Toorak', stationId : 1194},
+    24 : {stationName : 'Hawksburn', stationId : 1089},
+    25 : {stationName : 'South Yarra', stationId : 1180},
+    26 : {stationName : 'Richmond', stationId : 1162},
+    27 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var glenWaverlyLine = {
+var glenWaverlyLine = { // 16 stops
     0 : {stationName : 'Glen Waverly', stationId : 1078},
     1 : {stationName : 'Syndal', stationId : 1190},
     2 : {stationName : 'Mount Waverly', stationId : 1137},
@@ -116,7 +151,7 @@ var glenWaverlyLine = {
     15 : {stationName : 'Flinders Street', stationId : 1071}
 }
 
-var hurstbridgeLine = {
+var hurstbridgeLine = { // 24 stops
     0 : {stationName : 'Hurtsbridge', stationId : 1100},
     1 : {stationName : 'Wattle Glen', stationId : 1204},
     2 : {stationName : 'Diamond Creek', stationId : 1054},
@@ -143,7 +178,7 @@ var hurstbridgeLine = {
     23 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var lilydaleLine = {
+var lilydaleLine = {    // 24 stops
     0 : {stationName : 'Lilydale', stationId : 1115},
     1 : {stationName : 'Mooroolbark', stationId : 1133},
     2 : {stationName : 'Croydon', stationId : 1048},
@@ -155,8 +190,8 @@ var lilydaleLine = {
     8 : {stationName : 'Blackburn', stationId : 1023},
     9 : {stationName : 'Laburnum', stationId : 1111},
     10 : {stationName : 'Box Hill', stationId : 1026},
-    11 : {stationName : 'Mont Albert', stationId : 1129},
-    12 : {stationName : 'Surrey Hills', stationId : 1189},
+    11 : {stationName : 'Mont Albert', stationId : 1129},       // Mont albert station and Surrey Hills station are being
+    12 : {stationName : 'Surrey Hills', stationId : 1189},      // demolished and replaced by a single new station 'Union'
     13 : {stationName : 'Chatham', stationId : 1037},
     14 : {stationName : 'Canterbury', stationId : 1033},
     15 : {stationName : 'East Camberwell', stationId : 1057},
@@ -170,7 +205,7 @@ var lilydaleLine = {
     23 : {stationName : 'Flinders Street', stationId : 1071}
 }
 
-var merndaLine = {
+var merndaLine = {      // 25 stops
     0 : {stationName : 'Mernda', stationId : 1228},
     1 : {stationName : 'Hawkstowe', stationId : 1227},
     2 : {stationName : 'Middle Gorge', stationId : 1226},
@@ -198,7 +233,7 @@ var merndaLine = {
     24 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var pakenhamLine = {
+var pakenhamLine = {    // 27 stops
     0 : {stationName : 'Pakenham', stationId : 1153},
     1 : {stationName : 'Cardinia Road', stationId : 1223},
     2 : {stationName : 'Officer', stationId : 1151},
@@ -228,7 +263,7 @@ var pakenhamLine = {
     26 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var sandringhamLine = {
+var sandringhamLine = { // 14 stops
     0 : {stationName : 'Sandringham', stationId : 1173},
     1 : {stationName : 'Hampton', stationId : 1086},
     2 : {stationName : 'Brighton Beach', stationId : 1027},
@@ -245,7 +280,7 @@ var sandringhamLine = {
     13 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var showgroundsRacecourseLine = {
+var showgroundsRacecourseLine = {   // 5 stops
     0 : {stationName : 'Flemington Racecourse', stationId : 1070},
     1 : {stationName : 'Showgrounds', stationId : 1177},
     2 : {stationName : 'North Melbourne', stationId : 1144},
@@ -253,20 +288,20 @@ var showgroundsRacecourseLine = {
     4 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var stonyPointLine = {
+var stonyPointLine = {  // 10 stops
     0 : {stationName : 'Stony Point', stationId : 1185},
-    0 : {stationName : 'Crib Point', stationId : 1046},
-    0 : {stationName : 'Morradoo', stationId : 1136},
-    0 : {stationName : 'Bittern', stationId : 1022},
-    0 : {stationName : 'Hastings', stationId : 1088},
-    0 : {stationName : 'Tyabb', stationId : 1197},
-    0 : {stationName : 'Somerville', stationId : 1178},
-    0 : {stationName : 'Baxter', stationId : 1015},
-    0 : {stationName : 'Leawarra', stationId : 1114},
-    0 : {stationName : 'Frankston', stationId : 1073},
+    1 : {stationName : 'Crib Point', stationId : 1046},
+    2 : {stationName : 'Morradoo', stationId : 1136},
+    3 : {stationName : 'Bittern', stationId : 1022},
+    4 : {stationName : 'Hastings', stationId : 1088},
+    5 : {stationName : 'Tyabb', stationId : 1197},
+    6 : {stationName : 'Somerville', stationId : 1178},
+    7 : {stationName : 'Baxter', stationId : 1015},
+    8 : {stationName : 'Leawarra', stationId : 1114},
+    9 : {stationName : 'Frankston', stationId : 1073},
 }
 
-var sunburyLine = {
+var sunburyLine = {     // 16 stops
     0 : {stationName : 'Sunbury', stationId : 1187},
     1 : {stationName : 'Diggers Rest', stationId : 1055},
     2 : {stationName : 'Watergardens', stationId : 1202},
@@ -285,7 +320,7 @@ var sunburyLine = {
     15 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var upfieldLine = {
+var upfieldLine = {     // 16 stops
     0 : {stationName : 'Upfield', stationId : 1198},
     1 : {stationName : 'Gowrie', stationId : 1083},
     2 : {stationName : 'Fawkner', stationId : 1066},
@@ -304,7 +339,7 @@ var upfieldLine = {
     15 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var werribeeLine = {
+var werribeeLine = {    // 17 stops
     0 : {stationName : 'Werribee', stationId : 1205},
     1 : {stationName : 'Hoppers Crossing', stationId : 1097},
     2 : {stationName : 'Williams Landing', stationId : 1225},
@@ -324,7 +359,7 @@ var werribeeLine = {
     16 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var williamstownLine = {
+var williamstownLine = {    // 12 stops
     0 : {stationName : 'Williamstown', stationId : 1211},
     1 : {stationName : 'Williamstown Beach', stationId : 1212},
     2 : {stationName : 'North Williamstown', stationId : 1146},
@@ -338,5 +373,3 @@ var williamstownLine = {
     10 : {stationName : 'Southern Cross', stationId : 1181},
     11 : {stationName : 'Flinders Street', stationId : 1071},
 }
-
-//    0 : {stationName : '', stationId : },
