@@ -44,7 +44,7 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
 {
   if(terminus != true)
   {
-    if(stopsArray.length >= 18)
+    if(totalStops >= 22)
     {
       if(stopsArray.includes(stopId) == true)
       {
@@ -53,7 +53,22 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
       }
       else 
       {
-        document.getElementById('stopList'+ iterator).innerHTML = "---";
+        document.getElementById('stopList'+ iterator).innerHTML = "---0";
+        document.getElementById('stopList'+ iterator).style.fontSize = "100%";
+      };
+    }
+    else if(totalStops >= 11)
+    {
+      if(iterator >= 7) iterator += 1;
+      if(iterator >= 15) iterator += 1;
+      if(stopsArray.includes(stopId) == true)
+      {
+        document.getElementById('stopList'+ iterator).innerHTML = stopName;
+        document.getElementById('stopList'+ iterator).style.fontSize = "100%";
+      }
+      else 
+      {
+        document.getElementById('stopList'+ iterator).innerHTML = "---1";
         document.getElementById('stopList'+ iterator).style.fontSize = "100%";
       };
     }
@@ -64,12 +79,12 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
       if(stopsArray.includes(stopId) == true)
       {
         document.getElementById('stopList'+ iterator).innerHTML = stopName;
-        document.getElementById('stopList'+ iterator).style.fontSize = "150%";
+        document.getElementById('stopList'+ iterator).style.fontSize = "100%";
       }
       else 
       {
-        document.getElementById('stopList'+ iterator).innerHTML = "---";
-        document.getElementById('stopList'+ iterator).style.fontSize = "150%";
+        document.getElementById('stopList'+ iterator).innerHTML = "---2";
+        document.getElementById('stopList'+ iterator).style.fontSize = "100%";
       };
     }
   }
@@ -123,6 +138,7 @@ var directionId;
 var directionName;
 var stationArrayIndex;
 var stoppingListArray = new Array();
+var totalStops;
 ptvClient = ptv(devId, apiKey);
 
 // console.log(stops[1012]);
@@ -236,9 +252,18 @@ setInterval(() => {
               }
               // console.log("The user direction is: " + directionName)
               // console.log(stopsArray[stopsArray.length-1])
-              // console.log(stationNames);
+              if(directionName == "up")
+              {
+                totalStops = Object.keys(stopping_list).length-stationArrayIndex-1;
+              }
+              else
+              {
+                totalStops = stationArrayIndex+1;
+              }
+              console.log(totalStops);
               // stopping_list = line_name
-              // console.log(stopping_list);
+              // console.log(stationArrayIndex+1);
+              // console.log(depArray[0].length-stationArrayIndex-3);
               // console.log(userStation);
 
               // console.log(Object.keys(stopping_list).length)
@@ -294,6 +319,9 @@ setInterval(() => {
                 // console.log(fixedArray[0])
                 // console.log("name: " + stoppingListArray[m].stationName)
               }
+
+              
+
               // arrayIncludeDisplay(1092, 0); // Heathmont
               // arrayIncludeDisplay(1163, 1); // Ringwood
               // arrayIncludeDisplay(1091, 2); // Heatherdale
