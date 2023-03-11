@@ -42,6 +42,13 @@ function date_toUntil(date, schedTime)  // Gives an estimate for departure time
 
 function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List fill function 
 {
+  if(isNaN(totalStops) == true)
+  {
+    console.log("");  // Put Large 'Not in service' text in the centre of stopping list
+  }
+  else
+  {
+
   if(terminus != true)
   {
     if(totalStops >= 22)
@@ -53,7 +60,7 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
       }
       else 
       {
-        document.getElementById('stopList'+ iterator).innerHTML = "---0";
+        document.getElementById('stopList'+ iterator).innerHTML = "---";
         document.getElementById('stopList'+ iterator).style.fontSize = "100%";
       };
     }
@@ -68,7 +75,7 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
       }
       else 
       {
-        document.getElementById('stopList'+ iterator).innerHTML = "---1";
+        document.getElementById('stopList'+ iterator).innerHTML = "---";
         document.getElementById('stopList'+ iterator).style.fontSize = "100%";
       };
     }
@@ -83,7 +90,7 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
       }
       else 
       {
-        document.getElementById('stopList'+ iterator).innerHTML = "---2";
+        document.getElementById('stopList'+ iterator).innerHTML = "---";
         document.getElementById('stopList'+ iterator).style.fontSize = "100%";
       };
     }
@@ -91,6 +98,8 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
   if(stopId == destinationStop)
   {
     terminus = true;
+  };
+
   };
   // console.log(terminus);
 };
@@ -260,7 +269,7 @@ setInterval(() => {
               {
                 totalStops = stationArrayIndex+1;
               }
-              console.log(totalStops);
+              console.log(isNaN(totalStops));
               // stopping_list = line_name
               // console.log(stationArrayIndex+1);
               // console.log(depArray[0].length-stationArrayIndex-3);
