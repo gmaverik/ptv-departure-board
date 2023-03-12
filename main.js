@@ -77,21 +77,21 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
       {
         document.getElementById('stopList'+ iterator).innerHTML = "---";
         document.getElementById('stopList'+ iterator).style.fontSize = "100%";
-      };
+      }
     }
     else
     {
-      if(iterator >= 5) iterator += 2;
-      if(iterator >= 10) iterator += 2;
+      if(iterator >= 5) iterator += 3;
+      if(iterator >= 13) iterator += 3;
       if(stopsArray.includes(stopId) == true)
       {
         document.getElementById('stopList'+ iterator).innerHTML = stopName;
-        document.getElementById('stopList'+ iterator).style.fontSize = "100%";
+        document.getElementById('stopList'+ iterator).style.fontSize = "150%";
       }
       else 
       {
         document.getElementById('stopList'+ iterator).innerHTML = "---";
-        document.getElementById('stopList'+ iterator).style.fontSize = "100%";
+        document.getElementById('stopList'+ iterator).style.fontSize = "150%";
       };
     }
   }
@@ -227,7 +227,11 @@ setInterval(() => {
       }
       else
       {
-        document.getElementById('mainETD').innerHTML = date_toUntil(mainDepartureEstiTime, mainSTD) + " min";
+        if(date_toUntil(mainDepartureEstiTime, mainSTD) == 0) document.getElementById('mainETD').innerHTML = "now";
+        else
+        {
+          document.getElementById('mainETD').innerHTML = date_toUntil(mainDepartureEstiTime, mainSTD) + " min";
+        }
       };
     }).catch(console.error);
       
@@ -263,13 +267,14 @@ setInterval(() => {
               // console.log(stopsArray[stopsArray.length-1])
               if(directionName == "up")
               {
-                totalStops = Object.keys(stopping_list).length-stationArrayIndex-1;
+                totalStops = destArrayIndex-stationArrayIndex;
               }
               else
               {
-                totalStops = stationArrayIndex+1;
+                totalStops = stationArrayIndex;
               }
-              console.log(isNaN(totalStops));
+              // console.log(totalStops);
+
               // stopping_list = line_name
               // console.log(stationArrayIndex+1);
               // console.log(depArray[0].length-stationArrayIndex-3);
@@ -287,6 +292,17 @@ setInterval(() => {
                 // console.log("The user station is located at array index: " + stationArrayIndex);
               }
 
+              for (let q = 0; q < Object.keys(stopping_list).length; q++) { 
+                if(stopping_list[q].stationId == destinationStop)
+                {
+                  destArrayIndex = q;
+                  // console.log("The user station is: " + stopping_list[j].stationName);
+                  break;
+                }
+                
+                // console.log("The user station is located at array index: " + stationArrayIndex);
+              }
+              console.log(totalStops)
               // stoppingListArray.length = 0;
               if(directionName == "up")
               {
