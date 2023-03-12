@@ -101,7 +101,7 @@ var cranbourneLine = {  // 23 stops
     22 : {stationName : 'Flinders Street', stationId : 1071},
 }
 
-var frankstonLine = {   // 28 stops
+var frankstonLine = {   // 29 stops
     0 : {stationName : 'Frankston', stationId : 1073},
     1 : {stationName : 'Kananook', stationId : 1106},
     2 : {stationName : 'Seaford', stationId : 1174},
@@ -130,6 +130,7 @@ var frankstonLine = {   // 28 stops
     25 : {stationName : 'South Yarra', stationId : 1180},
     26 : {stationName : 'Richmond', stationId : 1162},
     27 : {stationName : 'Flinders Street', stationId : 1071},
+    28 : {stationName : 'Southern Cross', stationId : 1181},
 }
 
 var glenWaverlyLine = { // 16 stops
