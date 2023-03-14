@@ -28244,10 +28244,22 @@ var directionName;
 var stationArrayIndex;
 var stoppingListArray = new Array();
 var totalStops;
+var displayRefresh = false;
+var currentRunRef;
+var refreshRunRef;
 ptvClient = ptv(devId, apiKey);
 
 // console.log(stops[1012]);
 // console.log(alameinLine);
+
+  // Start New Code
+
+  ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 1, platform_numbers: [userPlatform] });
+  }).then(res => {
+    currentRunRef = res.body.departures[0].run_ref;
+  }).catch(console.error);
+
+  // End New Code
 
 setInterval(() => {
 
@@ -28259,6 +28271,44 @@ setInterval(() => {
   if(h == 24 || 0) h = "12";
   time = h + ':' + m;
   document.getElementById('time').innerHTML = time;
+
+  // Start New Code
+  ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 1, platform_numbers: [userPlatform] });
+  }).then(res => {
+  
+    refreshRunRef = res.body.departures[0].run_ref;
+    
+  //   // var refreshTimeSched = new Date(res.body.departures[0].scheduled_departure_utc);
+  //   // var refreshTime = new Date(res.body.departures[0].estimated_departure_utc);    
+  //   // console.log(date_toUntil(refreshTime, refreshTimeSched));
+  //   // if(date_toUntil(refreshTime, refreshTimeSched) == 1)
+  //   // {
+  //   //   displayRefresh = true;
+  //   // }
+  //   // else
+  //   // {
+  //   //   displayRefresh = false;
+  //   // }
+
+  }).catch(console.error);
+
+
+  if(refreshRunRef == currentRunRef)
+  {
+    console.log('Waiting');
+    displayRefresh = false;
+  }
+  else
+  {
+    console.log('New service found!');
+    currentRunRef = refreshRunRef;
+    displayRefresh = true;
+  }
+
+  if(displayRefresh == true)
+  {
+  // End New Code
+
 
    // Main Departure Destination
   ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
@@ -28799,6 +28849,13 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
 }).catch(console.error);
 
+// Start new code
+  }
+  else
+  {
+    console.log("Waiting...")
+  }
+// End new code
 console.log("Refreshed!");
 }, 1000);
 
