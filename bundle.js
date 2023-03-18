@@ -28256,13 +28256,14 @@ ptvClient = ptv(devId, apiKey);
 
   ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 1, platform_numbers: [userPlatform] });
   }).then(res => {
-    currentRunRef = res.body.departures[0].run_ref;
+    currentRunRef = res.body.departures[0].run_ref;   // Pre-loads the current 'Run Reference' into the variable 'currentRunRef'
   }).catch(console.error);
 
   // End New Code
 
-setInterval(() => {
+setInterval(() => {   // Code from here repeats every 1 second
 
+  // Start Clock Code
   a = new Date();
   h = a.getHours();
   m = a.getMinutes();
@@ -28271,41 +28272,49 @@ setInterval(() => {
   if(h == 24 || 0) h = "12";
   time = h + ':' + m;
   document.getElementById('time').innerHTML = time;
+  // End Clock Code
 
   // Start New Code
   ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 1, platform_numbers: [userPlatform] });
   }).then(res => {
-  
-    refreshRunRef = res.body.departures[0].run_ref;
-    
-  //   // var refreshTimeSched = new Date(res.body.departures[0].scheduled_departure_utc);
-  //   // var refreshTime = new Date(res.body.departures[0].estimated_departure_utc);    
-  //   // console.log(date_toUntil(refreshTime, refreshTimeSched));
-  //   // if(date_toUntil(refreshTime, refreshTimeSched) == 1)
-  //   // {
-  //   //   displayRefresh = true;
-  //   // }
-  //   // else
-  //   // {
-  //   //   displayRefresh = false;
-  //   // }
+    refreshRunRef = res.body.departures[0].run_ref;   // Gets the current 'Run Reference' and loads it into the variable 'refreshRunRef'
 
+  var mainSTD = new Date(res.body.departures[0].scheduled_departure_utc);
+    document.getElementById('mainSTD').innerHTML = date_toTime(mainSTD);
+  
+    var mainDepartureEstiTime = new Date(res.body.departures[0].estimated_departure_utc);    
+    
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
+    }).then(res => {
+      if(res.body.departures[0].at_platform == true)
+      {
+        document.getElementById('mainETD').innerHTML = "now";
+      }
+      else
+      {
+        if(date_toUntil(mainDepartureEstiTime, mainSTD) == 0) document.getElementById('mainETD').innerHTML = "now";
+        else
+        {
+          document.getElementById('mainETD').innerHTML = date_toUntil(mainDepartureEstiTime, mainSTD) + " min";
+        }
+      };
+    }).catch(console.error);
   }).catch(console.error);
 
 
-  if(refreshRunRef == currentRunRef)
+  if(refreshRunRef == currentRunRef)    // Checks to see whether or not the original 'Run Reference' is still the same, meaning if there's a new service
   {
-    console.log('Waiting');
+    console.log('Waiting');   // If not, do nothing
     displayRefresh = false;
   }
   else
   {
-    console.log('New service found!');
+    console.log('New service found!');    // If so, continue
     currentRunRef = refreshRunRef;
     displayRefresh = true;
   }
 
-  if(displayRefresh == true)
+  if(displayRefresh == true)  // Checks if a new service was found
   {
   // End New Code
 
@@ -28313,13 +28322,13 @@ setInterval(() => {
    // Main Departure Destination
   ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
-    mainDeparturePlatform = res.body.departures[0].platform_number;
-    mainDepartureDest = res.body.departures[0].direction_id;
+    // mainDeparturePlatform = res.body.departures[0].platform_number;
+    // mainDepartureDest = res.body.departures[0].direction_id;
+    // console.log(res.body.departures[0].route_id)
+    // console.log(line_id);
     mainDepartureRunRef = res.body.departures[0].run_ref;
     line_id = res.body.departures[0].route_id; // Which line it runs on
-    // console.log(res.body.departures[0].route_id)
 
-    // console.log(line_id);
 
     switch(line_id) {
       case 1: line_name = "alameinLine"; stopping_list = alameinLine;
@@ -28360,26 +28369,7 @@ setInterval(() => {
 
     // console.log(line_name);
 
-    var mainSTD = new Date(res.body.departures[0].scheduled_departure_utc);
-    document.getElementById('mainSTD').innerHTML = date_toTime(mainSTD);
-  
-    var mainDepartureEstiTime = new Date(res.body.departures[0].estimated_departure_utc);    
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
-    }).then(res => {
-      if(res.body.departures[0].at_platform == true)
-      {
-        document.getElementById('mainETD').innerHTML = "now";
-      }
-      else
-      {
-        if(date_toUntil(mainDepartureEstiTime, mainSTD) == 0) document.getElementById('mainETD').innerHTML = "now";
-        else
-        {
-          document.getElementById('mainETD').innerHTML = date_toUntil(mainDepartureEstiTime, mainSTD) + " min";
-        }
-      };
-    }).catch(console.error);
       
     ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepartureRunRef], route_type: 0 });
     }).then(res => {
