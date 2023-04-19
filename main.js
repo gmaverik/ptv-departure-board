@@ -3,8 +3,6 @@ console.log('Custom Javascript Loaded');
 var userStation = 1016 //prompt("Station Id", 1016);
 var userPlatform = 1 //prompt("Platform Number", 1);
 
-//file version 115.a
-
 const urlQuery = window.location.search
 const splitUrlQuery = urlQuery.split("/")
 if(splitUrlQuery[0] == "?data")
@@ -107,7 +105,7 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
 function clearDepartureBoard() // Clears the Departure Stop Board 
 {
   terminus = false;
-  for (let i = 0; i < 21; i++)
+  for (let i = 0; i < 31; i++)
   {
     document.getElementById('stopList'+ i).innerHTML = " ";
   };
@@ -115,13 +113,13 @@ function clearDepartureBoard() // Clears the Departure Stop Board
 
 function isCityLoop(terminus) // Checks if service is a city loop service or a direct to flinders street service
 {
-  if(stopsArray.includes(1155 || 1120 || 1068))
-  {
+  // if(stopsArray.includes(1155 || 1120 || 1068))
+  // {
       if(terminus == 1155 || 1120 || 1068)
       {
         return false;
       }
-      else if(terminus == 1071 && stopsArray.includes(1155 || 1120 || 1068))
+      else if(terminus == 1071)
       {
         return true;
       }
@@ -129,7 +127,7 @@ function isCityLoop(terminus) // Checks if service is a city loop service or a d
       {
         return;
       }
-  }
+  // }
 };
 
 const ptv = require('ptv-api');
@@ -151,6 +149,7 @@ var totalStops;
 var displayRefresh = false;
 var currentRunRef;
 var refreshRunRef;
+var cityLoopService;
 ptvClient = ptv(devId, apiKey);
 
 // console.log(stops[1012]);
@@ -216,6 +215,7 @@ setInterval(() => {   // Code from here repeats every 1 second
     console.log('New service found!');    // If so, continue
     currentRunRef = refreshRunRef;
     displayRefresh = true;
+    cityLoopService = false;
   }
 
   if(displayRefresh == true)  // Checks if a new service was found
@@ -293,6 +293,11 @@ setInterval(() => {   // Code from here repeats every 1 second
               {
                   stopsArray.push(depArray[0][i].stop_id);
               };
+              
+//               if(stopsArray.includes(1155 || 1068 || 1120) == true)
+//               {
+// console.log("yup it works!!!!!!!!")
+//               }
               directionId = res.body.departures[0].direction_id
               // console.log(directionId);
               if(directionId == 1)
@@ -374,7 +379,37 @@ setInterval(() => {   // Code from here repeats every 1 second
 
 
               clearDepartureBoard();
+              if(stopsArray.includes(1155 || 1068 || 1120) == true)
+              {
+                console.log("Is City Loop!")
+                cityLoopService = true;
+              }
+              // console.log()
               // console.log(stoppingListArray.length)
+              if(stopsArray.includes(1155 || 1068 || 1120) == true)
+              {
+                if(directionName == "down")
+                {
+                  if(line_id == 5 || 8)
+                  {
+                    arrayIncludeDisplay(1181, "Southern Cross", 0)
+                    arrayIncludeDisplay(1068, "Flagstaff", 1)
+                    arrayIncludeDisplay(1120, "Melbourne Central", 2)
+                    arrayIncludeDisplay(1155, "Parliament ", 3)
+                  }
+                }
+                for (let o = 0; o < stoppingListArray.length; o++) {
+                  fixedArray = stoppingListArray[o]
+                  arrayIncludeDisplay(fixedArray[0], fixedArray[1], o+4)
+                  // console.log(o)
+                  // console.log("iterator: " + o)
+                  // console.log("id: " + stoppingListArray[o])
+                  // console.log(fixedArray[0])
+                  // console.log("name: " + stoppingListArray[m].stationName)
+                }
+              }
+              else
+              {
               for (let o = 0; o < stoppingListArray.length; o++) {
                 fixedArray = stoppingListArray[o]
                 arrayIncludeDisplay(fixedArray[0], fixedArray[1], o)
@@ -384,6 +419,7 @@ setInterval(() => {   // Code from here repeats every 1 second
                 // console.log(fixedArray[0])
                 // console.log("name: " + stoppingListArray[m].stationName)
               }
+              } 
 
               
 
