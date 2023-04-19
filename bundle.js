@@ -28203,7 +28203,7 @@ function arrayIncludeDisplay(stopId, stopName, iterator) // Departure Stop List 
 function clearDepartureBoard() // Clears the Departure Stop Board 
 {
   terminus = false;
-  for (let i = 0; i < 21; i++)
+  for (let i = 0; i < 31; i++)
   {
     document.getElementById('stopList'+ i).innerHTML = " ";
   };
@@ -28211,13 +28211,13 @@ function clearDepartureBoard() // Clears the Departure Stop Board
 
 function isCityLoop(terminus) // Checks if service is a city loop service or a direct to flinders street service
 {
-  if(stopsArray.includes(1155 || 1120 || 1068))
-  {
+  // if(stopsArray.includes(1155 || 1120 || 1068))
+  // {
       if(terminus == 1155 || 1120 || 1068)
       {
         return false;
       }
-      else if(terminus == 1071 && stopsArray.includes(1155 || 1120 || 1068))
+      else if(terminus == 1071)
       {
         return true;
       }
@@ -28225,7 +28225,7 @@ function isCityLoop(terminus) // Checks if service is a city loop service or a d
       {
         return;
       }
-  }
+  // }
 };
 
 const ptv = require('ptv-api');
@@ -28244,13 +28244,27 @@ var directionName;
 var stationArrayIndex;
 var stoppingListArray = new Array();
 var totalStops;
+var displayRefresh = false;
+var currentRunRef;
+var refreshRunRef;
+var cityLoopService;
 ptvClient = ptv(devId, apiKey);
 
 // console.log(stops[1012]);
 // console.log(alameinLine);
 
-setInterval(() => {
+  // Start New Code
 
+  ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 1, platform_numbers: [userPlatform] });
+  }).then(res => {
+    currentRunRef = res.body.departures[0].run_ref;   // Pre-loads the current 'Run Reference' into the variable 'currentRunRef'
+  }).catch(console.error);
+
+  // End New Code
+
+setInterval(() => {   // Code from here repeats every 1 second
+
+  // Start Clock Code
   a = new Date();
   h = a.getHours();
   m = a.getMinutes();
@@ -28259,17 +28273,64 @@ setInterval(() => {
   if(h == 24 || 0) h = "12";
   time = h + ':' + m;
   document.getElementById('time').innerHTML = time;
+  // End Clock Code
+
+  // Start New Code
+  ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 1, platform_numbers: [userPlatform] });
+  }).then(res => {
+    refreshRunRef = res.body.departures[0].run_ref;   // Gets the current 'Run Reference' and loads it into the variable 'refreshRunRef'
+
+  var mainSTD = new Date(res.body.departures[0].scheduled_departure_utc);
+    document.getElementById('mainSTD').innerHTML = date_toTime(mainSTD);
+  
+    var mainDepartureEstiTime = new Date(res.body.departures[0].estimated_departure_utc);    
+    
+    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
+    }).then(res => {
+      if(res.body.departures[0].at_platform == true)
+      {
+        document.getElementById('mainETD').innerHTML = "now";
+      }
+      else
+      {
+        if(date_toUntil(mainDepartureEstiTime, mainSTD) == 0) document.getElementById('mainETD').innerHTML = "now";
+        else
+        {
+          document.getElementById('mainETD').innerHTML = date_toUntil(mainDepartureEstiTime, mainSTD) + " min";
+        }
+      };
+    }).catch(console.error);
+  }).catch(console.error);
+
+
+  if(refreshRunRef == currentRunRef)    // Checks to see whether or not the original 'Run Reference' is still the same, meaning if there's a new service
+  {
+    console.log('Waiting');   // If not, do nothing
+    displayRefresh = false;
+  }
+  else
+  {
+    console.log('New service found!');    // If so, continue
+    currentRunRef = refreshRunRef;
+    displayRefresh = true;
+    cityLoopService = false;
+  }
+
+  if(displayRefresh == true)  // Checks if a new service was found
+  {
+  // End New Code
+
 
    // Main Departure Destination
   ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
   }).then(res => {
-    mainDeparturePlatform = res.body.departures[0].platform_number;
-    mainDepartureDest = res.body.departures[0].direction_id;
+    // mainDeparturePlatform = res.body.departures[0].platform_number;
+    // mainDepartureDest = res.body.departures[0].direction_id;
+    // console.log(res.body.departures[0].route_id)
+    // console.log(line_id);
     mainDepartureRunRef = res.body.departures[0].run_ref;
     line_id = res.body.departures[0].route_id; // Which line it runs on
-    // console.log(res.body.departures[0].route_id)
 
-    // console.log(line_id);
 
     switch(line_id) {
       case 1: line_name = "alameinLine"; stopping_list = alameinLine;
@@ -28310,26 +28371,7 @@ setInterval(() => {
 
     // console.log(line_name);
 
-    var mainSTD = new Date(res.body.departures[0].scheduled_departure_utc);
-    document.getElementById('mainSTD').innerHTML = date_toTime(mainSTD);
-  
-    var mainDepartureEstiTime = new Date(res.body.departures[0].estimated_departure_utc);    
     
-    ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_type: 0, stop_id: [userStation], max_results: 4, platform_numbers: [userPlatform] });
-    }).then(res => {
-      if(res.body.departures[0].at_platform == true)
-      {
-        document.getElementById('mainETD').innerHTML = "now";
-      }
-      else
-      {
-        if(date_toUntil(mainDepartureEstiTime, mainSTD) == 0) document.getElementById('mainETD').innerHTML = "now";
-        else
-        {
-          document.getElementById('mainETD').innerHTML = date_toUntil(mainDepartureEstiTime, mainSTD) + " min";
-        }
-      };
-    }).catch(console.error);
       
     ptvClient.then(apis => { return apis.Patterns.Patterns_GetPatternByRun({ run_id: [mainDepartureRunRef], route_type: 0 });
     }).then(res => {
@@ -28349,6 +28391,11 @@ setInterval(() => {
               {
                   stopsArray.push(depArray[0][i].stop_id);
               };
+              
+//               if(stopsArray.includes(1155 || 1068 || 1120) == true)
+//               {
+// console.log("yup it works!!!!!!!!")
+//               }
               directionId = res.body.departures[0].direction_id
               // console.log(directionId);
               if(directionId == 1)
@@ -28430,7 +28477,37 @@ setInterval(() => {
 
 
               clearDepartureBoard();
+              if(stopsArray.includes(1155 || 1068 || 1120) == true)
+              {
+                console.log("Is City Loop!")
+                cityLoopService = true;
+              }
+              // console.log()
               // console.log(stoppingListArray.length)
+              if(stopsArray.includes(1155 || 1068 || 1120) == true)
+              {
+                if(directionName == "down")
+                {
+                  if(line_id == 5 || 8)
+                  {
+                    arrayIncludeDisplay(1181, "Southern Cross", 0)
+                    arrayIncludeDisplay(1068, "Flagstaff", 1)
+                    arrayIncludeDisplay(1120, "Melbourne Central", 2)
+                    arrayIncludeDisplay(1155, "Parliament ", 3)
+                  }
+                }
+                for (let o = 0; o < stoppingListArray.length; o++) {
+                  fixedArray = stoppingListArray[o]
+                  arrayIncludeDisplay(fixedArray[0], fixedArray[1], o+4)
+                  // console.log(o)
+                  // console.log("iterator: " + o)
+                  // console.log("id: " + stoppingListArray[o])
+                  // console.log(fixedArray[0])
+                  // console.log("name: " + stoppingListArray[m].stationName)
+                }
+              }
+              else
+              {
               for (let o = 0; o < stoppingListArray.length; o++) {
                 fixedArray = stoppingListArray[o]
                 arrayIncludeDisplay(fixedArray[0], fixedArray[1], o)
@@ -28440,6 +28517,7 @@ setInterval(() => {
                 // console.log(fixedArray[0])
                 // console.log("name: " + stoppingListArray[m].stationName)
               }
+              } 
 
               
 
@@ -28799,6 +28877,13 @@ ptvClient.then(apis => { return apis.Departures.Departures_GetForStop({ route_ty
 
 }).catch(console.error);
 
+// Start new code
+  }
+  else
+  {
+    console.log("Waiting...")
+  }
+// End new code
 console.log("Refreshed!");
 }, 1000);
 
