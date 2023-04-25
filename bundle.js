@@ -66,13 +66,14 @@ setInterval(() => {
   
   timeNow = new Date();
   hourNow = timeNow.getHours();
+  hourNow24 = timeNow.getHours();
   minuteNow = timeNow.getMinutes();
   secondNow = timeNow.getSeconds();
   if(hourNow > 12) hourNow = hourNow - 12;
   if(hourNow == 0 || hourNow == 24) hourNow = 12;
   if(minuteNow < 10) minuteNow = "0" + minuteNow;
   if(secondNow < 10) secondNow = "0" + secondNow;
-  if(hourNow < 10) hourNow24 = "0" + hourNow;
+  if(hourNow24 < 10) hourNow24 = "0" + hourNow24;
   clockNow = `${hourNow}:${minuteNow}:${secondNow}`;
   clockNow24 = `${hourNow24}:${minuteNow}:${secondNow}`;
   // console.log(`T${hourNow24}${minuteNow}${secondNow}`);
