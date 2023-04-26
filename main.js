@@ -80,7 +80,7 @@ setInterval(() => {
 (async function() {
   const response = await fetch("http://timetableapi.ptv.vic.gov.au" + primaryRequest + "&signature=" + CryptoJS.HmacSHA1(primaryRequest, apiKey).toString());
   const json = await response.json();
-  console.info("http://timetableapi.ptv.vic.gov.au" + primaryRequest + "&signature=" + CryptoJS.HmacSHA1(primaryRequest, apiKey).toString())
+  // console.info("http://timetableapi.ptv.vic.gov.au" + primaryRequest + "&signature=" + CryptoJS.HmacSHA1(primaryRequest, apiKey).toString())
   primaryResponse = json;
   // console.log(primaryResponse);
   runRef0 = primaryResponse.departures[0].run_ref;
