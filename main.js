@@ -10,6 +10,8 @@ var primaryRequest;
 var runRef0, runRef1, runRef2, runRef3, runRef4;
 var primaryRequest;
 var sorted = [];
+var departureList = [];
+var stoppingList = [];
 var j = 0;
 var currentRunRef = 000000;
 
@@ -24,10 +26,9 @@ if(splitUrlQuery[0] == "?data")
 for (let j = 0; j < Object.keys(stations).length; j++) { 
   if(stations[j].stationId == userStation)
   {
-    userStationName =  stations[j].stationName;   // console.log("The user station is: " + stopping_list[j].stationName);
+    userStationName =  stations[j].stationName;
     break;
   }
-  // console.log("The user station is located at array index: " + stationArrayIndex);
 }
 
 function date_toTime(date) // Converts "YYYY-MM-DDTHH:MM:SSZ" to "HH:MM" (plus 24 to 12h time) 
@@ -55,8 +56,15 @@ function date_toUntil(date, schedTime)  // Gives an estimate for departure time
   return Math.ceil(difference / 60000);
 };
 
-// var hash = CryptoJS.HmacSHA1(comRequest, apiKey);
-// console.log("https://timetableapi.ptv.vic.gov.au" + comRequest + "&signature=" + hash.toString())
+function id_toName(id)
+{
+  for (let m = 0; m < Object.keys(stations).length; m++) { 
+    if(stations[m].stationId == id)
+    {
+      return stations[m].stationName;   // console.log("The user station is: " + stopping_list[j].stationName);
+    }
+  }
+}
 
 setInterval(() => {
   
@@ -72,7 +80,6 @@ setInterval(() => {
   if(hourNow24 < 10) hourNow24 = "0" + hourNow24;
   clockNow = `${hourNow}:${minuteNow}:${secondNow}`;
   clockNow24 = `${hourNow24}:${minuteNow}:${secondNow}`;
-  // console.log(`T${hourNow24}${minuteNow}${secondNow}`);
 
   primaryRequest = "/v3/departures/route_type/0/stop/"+ userStation +"?platform_numbers=" + userPlatform + "&max_results=1000&expand=all" + "&devid=" + devId;
 
@@ -134,6 +141,35 @@ setInterval(() => {
   {
     console.log("New Service Detected")
     currentRunRef = runRef0
+    secondaryRequest = "/v3/pattern/run/" + currentRunRef + "/route_type/0/?expand=all&stop_id=" + userStation + "&include_skipped_stops=true" + "&devid=" + devId;
+
+    (async function() {
+      const response = await fetch("http://timetableapi.ptv.vic.gov.au" + secondaryRequest + "&signature=" + CryptoJS.HmacSHA1(secondaryRequest, apiKey).toString());
+      const json = await response.json();
+      // console.info("http://timetableapi.ptv.vic.gov.au" + primaryRequest + "&signature=" + CryptoJS.HmacSHA1(primaryRequest, apiKey).toString())
+      secondaryResponse = json;
+      departureList = secondaryResponse.departures;
+      stoppingList = [];
+      departureList.sort(function(a, b){return a.departure_sequence - b.departure_sequence}); 
+
+      for (let k = 0; k < departureList.length; k++) { 
+        if(departureList[k].skipped_stops.length != 0)
+        {
+          stoppingList.push(id_toName(departureList[k].stop_id))
+          for (let l = 0; l < departureList[k].skipped_stops.length; l++) {
+           stoppingList.push("----")
+          }
+        }
+        else
+        {
+          stoppingList.push(id_toName(departureList[k].stop_id))
+        }
+      }
+      console.log(stoppingList)
+
+
+    })();
+
   }
 
   else
@@ -142,7 +178,7 @@ setInterval(() => {
   }
 
 
-  console.log(primaryResponse)
+  // console.log(primaryResponse)
 
   // secondaryRequest0 = "/v3/pattern/run/"+ runRef0 + "/route_type/0?expand=all&include_skipped_stops=true&devid=" + devId;
   // secondaryRequest1 = "/v3/pattern/run/"+ runRef1 + "/route_type/0?expand=all&include_skipped_stops=true&devid=" + devId;
