@@ -155,11 +155,21 @@ setInterval(() => {
       stoppingList = [];
       departureList.sort(function(a, b){return a.departure_sequence - b.departure_sequence}); 
 
+
+      for (let o = 0; o <departureList.length; o++)
+      {
+        if(departureList[o].stop_id == userStation)
+        {
+          departureList.splice(0, o+1)
+        }
+      }
+
       for (let k = 0; k < departureList.length; k++) { 
         if(departureList[k].skipped_stops.length != 0)
         {
           stoppingList.push(id_toName(departureList[k].stop_id))
-          for (let l = 0; l < departureList[k].skipped_stops.length; l++) {
+          for (let l = 0; l < departureList[k].skipped_stops.length; l++) 
+          {
            stoppingList.push("----")
           }
         }
@@ -197,10 +207,10 @@ setInterval(() => {
         `\n` +
         `${userStationName} Station\t\t\t\t\t\tNext Departures\t\t\t\t\t\tT${clockNow24}\n` +
         `${date_toTime(sched0)}\t${dest0}\t${date_toUntil(est0, sched0)}\t${run0service} Via \n` +
-        `${date_toTime(sched1)}\t${dest1}\t${date_toUntil(est1, sched1)}\t${run0service}\n` +
-        `${date_toTime(sched2)}\t${dest2}\t${date_toUntil(est2, sched2)}\t${run0service}\n` +
-        `${date_toTime(sched3)}\t${dest3}\t${date_toUntil(est3, sched3)}\t${run0service}\n` +
-        `${date_toTime(sched4)}\t${dest4}\t${date_toUntil(est4, sched4)}\t${run0service}\n`
+        `${date_toTime(sched1)}\t${dest1}\t${date_toUntil(est1, sched1)}\t${run1service}\n` +
+        `${date_toTime(sched2)}\t${dest2}\t${date_toUntil(est2, sched2)}\t${run2service}\n` +
+        `${date_toTime(sched3)}\t${dest3}\t${date_toUntil(est3, sched3)}\t${run3service}\n` +
+        `${date_toTime(sched4)}\t${dest4}\t${date_toUntil(est4, sched4)}\t${run4service}\n`
       )
 
 })();
