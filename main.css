@@ -2,7 +2,7 @@
 * {
 font-family: network-sans;
 color: white;
-background-color: black;
+background-color: #262626;
 font-size: 2vw;
 }
 
@@ -140,7 +140,12 @@ font-size: 2vw;
     font-weight:bolder;
 }
 
-#timeBorder
+#timeBorderL
+{
+    background-color: white;
+    border-bottom: solid 1px white;
+}
+#timeBorderR
 {
     background-color: white;
     border-bottom: solid 1px white;

@@ -81,8 +81,11 @@ setInterval(() => {
   if(minuteNow < 10) minuteNow = "0" + minuteNow;
   if(secondNow < 10) secondNow = "0" + secondNow;
   if(hourNow24 < 10) hourNow24 = "0" + hourNow24;
+  clockNowNoSeconds = `${hourNow}:${minuteNow}`;
   clockNow = `${hourNow}:${minuteNow}:${secondNow}`;
   clockNow24 = `${hourNow24}:${minuteNow}:${secondNow}`;
+  document.getElementById("time").innerHTML = clockNowNoSeconds; // HTML
+
 
   primaryRequest = "/v3/departures/route_type/0/stop/"+ userStation +"?platform_numbers=" + userPlatform + "&max_results=1000&expand=all" + "&devid=" + devId;
 
@@ -180,6 +183,21 @@ setInterval(() => {
       }
       console.log(stoppingList)
 
+	  document.getElementById("mainTerm").innerHTML = dest0;	//HTML
+	  document.getElementById("subTerm0").innerHTML = dest1;	//HTML
+	  document.getElementById("subTerm1").innerHTML = dest2;	//HTML
+	  document.getElementById("subTerm2").innerHTML = dest3;	//HTML
+
+	  document.getElementById("mainSTD").innerHTML = date_toTime(sched0);	//HTML
+	  document.getElementById("subSTD0").innerHTML = date_toTime(sched1);	//HTML
+	  document.getElementById("subSTD1").innerHTML = date_toTime(sched2);	//HTML
+	  document.getElementById("subSTD2").innerHTML = date_toTime(sched3);	//HTML
+
+	  document.getElementById("mainETD").innerHTML = date_toUntil(est0, sched0) + ' min';
+	  document.getElementById("subETD0").innerHTML = date_toUntil(est1, sched1) + ' min';
+	  document.getElementById("subETD1").innerHTML = date_toUntil(est2, sched2) + ' min';
+	  document.getElementById("subETD2").innerHTML = date_toUntil(est3, sched3) + ' min';
+
 
     })();
 
@@ -187,7 +205,23 @@ setInterval(() => {
 
   else
   {
-  
+	document.getElementById("mainTerm").innerHTML = dest0;		//HTML
+	document.getElementById("subTerm0").innerHTML = dest1;		//HTML
+	document.getElementById("subTerm1").innerHTML = dest2;		//HTML
+	document.getElementById("subTerm2").innerHTML = dest3;		//HTML
+
+	document.getElementById("mainSTD").innerHTML = date_toTime(sched0);	//HTML
+	document.getElementById("subSTD0").innerHTML = date_toTime(sched1);	//HTML
+	document.getElementById("subSTD1").innerHTML = date_toTime(sched2);	//HTML
+	document.getElementById("subSTD2").innerHTML = date_toTime(sched3);	//HTML
+
+	document.getElementById("mainETD").innerHTML = date_toUntil(est0, sched0) + ' min';
+	document.getElementById("subETD0").innerHTML = date_toUntil(est1, sched1) + ' min';
+	document.getElementById("subETD1").innerHTML = date_toUntil(est2, sched2) + ' min';
+	document.getElementById("subETD2").innerHTML = date_toUntil(est3, sched3) + ' min';
+
+
+
   }
 
 
