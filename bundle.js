@@ -17,6 +17,9 @@ var departureList = [];
 var stoppingList = [];
 var j = 0;
 var currentRunRef = 000000;
+var burnBar = document.getElementById("burning-bar");
+var moving = false;
+
 
 const urlQuery = window.location.search;
 const splitUrlQuery = urlQuery.split("/");
@@ -33,6 +36,7 @@ for (let j = 0; j < Object.keys(stations).length; j++) {
     break;
   }
 }
+
 
 function date_toTime(date) // Converts "YYYY-MM-DDTHH:MM:SSZ" to "HH:MM" (plus 24 to 12h time) 
 {
@@ -64,10 +68,10 @@ function id_toName(id)
   for (let m = 0; m < Object.keys(stations).length; m++) { 
     if(stations[m].stationId == id)
     {
-      return stations[m].stationName;   // console.log("The user station is: " + stopping_list[j].stationName);
+      return stations[m].stationName;
     }
   }
-}
+};
 
 setInterval(() => {
   
@@ -81,11 +85,8 @@ setInterval(() => {
   if(minuteNow < 10) minuteNow = "0" + minuteNow;
   if(secondNow < 10) secondNow = "0" + secondNow;
   if(hourNow24 < 10) hourNow24 = "0" + hourNow24;
-  clockNowNoSeconds = `${hourNow}:${minuteNow}`;
   clockNow = `${hourNow}:${minuteNow}:${secondNow}`;
   clockNow24 = `${hourNow24}:${minuteNow}:${secondNow}`;
-  document.getElementById("time").innerHTML = clockNowNoSeconds; // HTML
-
 
   primaryRequest = "/v3/departures/route_type/0/stop/"+ userStation +"?platform_numbers=" + userPlatform + "&max_results=1000&expand=all" + "&devid=" + devId;
 
@@ -101,7 +102,7 @@ setInterval(() => {
       sorted[j] = i;
       j++;
     }
-  }
+  };
 // console.log(primaryResponse.stops[userStation].stop_name)
   // for (let j = 0; j < Object.keys(stations).length; j++) { 
   //   if(primaryResponse.stops[j].stop_id == userStation)
@@ -125,17 +126,17 @@ setInterval(() => {
   dest3 = primaryResponse.runs[runRef3].destination_name;
   dest4 = primaryResponse.runs[runRef4].destination_name;
 // console.log(runRef0);
-  sched0 = new Date(primaryResponse.departures[sorted[0]].scheduled_departure_utc)
-  sched1 = new Date(primaryResponse.departures[sorted[1]].scheduled_departure_utc)
-  sched2 = new Date(primaryResponse.departures[sorted[2]].scheduled_departure_utc)
-  sched3 = new Date(primaryResponse.departures[sorted[3]].scheduled_departure_utc)
-  sched4 = new Date(primaryResponse.departures[sorted[4]].scheduled_departure_utc)
+  sched0 = new Date(primaryResponse.departures[sorted[0]].scheduled_departure_utc);
+  sched1 = new Date(primaryResponse.departures[sorted[1]].scheduled_departure_utc);
+  sched2 = new Date(primaryResponse.departures[sorted[2]].scheduled_departure_utc);
+  sched3 = new Date(primaryResponse.departures[sorted[3]].scheduled_departure_utc);
+  sched4 = new Date(primaryResponse.departures[sorted[4]].scheduled_departure_utc);
 
-  est0 = new Date(primaryResponse.departures[sorted[0]].estimated_departure_utc)
-  est1 = new Date(primaryResponse.departures[sorted[1]].estimated_departure_utc)
-  est2 = new Date(primaryResponse.departures[sorted[2]].estimated_departure_utc)
-  est3 = new Date(primaryResponse.departures[sorted[3]].estimated_departure_utc)
-  est4 = new Date(primaryResponse.departures[sorted[4]].estimated_departure_utc)
+  est0 = new Date(primaryResponse.departures[sorted[0]].estimated_departure_utc);
+  est1 = new Date(primaryResponse.departures[sorted[1]].estimated_departure_utc);
+  est2 = new Date(primaryResponse.departures[sorted[2]].estimated_departure_utc);
+  est3 = new Date(primaryResponse.departures[sorted[3]].estimated_departure_utc);
+  est4 = new Date(primaryResponse.departures[sorted[4]].estimated_departure_utc);
 
   if(primaryResponse.runs[runRef0].express_stop_count >= 1) run0service = "Express"; else run0service = "Stops All";
   if(primaryResponse.runs[runRef1].express_stop_count >= 1) run1service = "Express"; else run1service = "Stops All";
@@ -145,8 +146,10 @@ setInterval(() => {
 
   if(currentRunRef != runRef0)
   {
-    console.log("New Service Detected")
-    currentRunRef = runRef0
+    console.log("New Service Detected");
+    currentRunRef = runRef0;
+    moving = false;
+    document.getElementById("burning-bar").style.width = "0%";
     secondaryRequest = "/v3/pattern/run/" + currentRunRef + "/route_type/0/?expand=all&stop_id=" + userStation + "&include_skipped_stops=true" + "&devid=" + devId;
 
     (async function() {
@@ -159,44 +162,29 @@ setInterval(() => {
       departureList.sort(function(a, b){return a.departure_sequence - b.departure_sequence}); 
 
 
-      for (let o = 0; o <departureList.length; o++)
+      for (let o = 0; o < departureList.length; o++)
       {
         if(departureList[o].stop_id == userStation)
         {
-          departureList.splice(0, o+1)
-        }
-      }
+          departureList.splice(0, o+1);
+        };
+      };
 
       for (let k = 0; k < departureList.length; k++) { 
         if(departureList[k].skipped_stops.length != 0)
         {
-          stoppingList.push(id_toName(departureList[k].stop_id))
+          stoppingList.push(id_toName(departureList[k].stop_id));
           for (let l = 0; l < departureList[k].skipped_stops.length; l++) 
           {
-           stoppingList.push("----")
-          }
+           stoppingList.push("----");
+          };
         }
         else
         {
           stoppingList.push(id_toName(departureList[k].stop_id))
-        }
+        };
       }
-      console.log(stoppingList)
-
-	  document.getElementById("mainTerm").innerHTML = dest0;	//HTML
-	  document.getElementById("subTerm0").innerHTML = dest1;	//HTML
-	  document.getElementById("subTerm1").innerHTML = dest2;	//HTML
-	  document.getElementById("subTerm2").innerHTML = dest3;	//HTML
-
-	  document.getElementById("mainSTD").innerHTML = date_toTime(sched0);	//HTML
-	  document.getElementById("subSTD0").innerHTML = date_toTime(sched1);	//HTML
-	  document.getElementById("subSTD1").innerHTML = date_toTime(sched2);	//HTML
-	  document.getElementById("subSTD2").innerHTML = date_toTime(sched3);	//HTML
-
-	  document.getElementById("mainETD").innerHTML = date_toUntil(est0, sched0) + ' min';
-	  document.getElementById("subETD0").innerHTML = date_toUntil(est1, sched1) + ' min';
-	  document.getElementById("subETD1").innerHTML = date_toUntil(est2, sched2) + ' min';
-	  document.getElementById("subETD2").innerHTML = date_toUntil(est3, sched3) + ' min';
+      console.log(stoppingList);
 
 
     })();
@@ -205,24 +193,8 @@ setInterval(() => {
 
   else
   {
-	document.getElementById("mainTerm").innerHTML = dest0;		//HTML
-	document.getElementById("subTerm0").innerHTML = dest1;		//HTML
-	document.getElementById("subTerm1").innerHTML = dest2;		//HTML
-	document.getElementById("subTerm2").innerHTML = dest3;		//HTML
-
-	document.getElementById("mainSTD").innerHTML = date_toTime(sched0);	//HTML
-	document.getElementById("subSTD0").innerHTML = date_toTime(sched1);	//HTML
-	document.getElementById("subSTD1").innerHTML = date_toTime(sched2);	//HTML
-	document.getElementById("subSTD2").innerHTML = date_toTime(sched3);	//HTML
-
-	document.getElementById("mainETD").innerHTML = date_toUntil(est0, sched0) + ' min';
-	document.getElementById("subETD0").innerHTML = date_toUntil(est1, sched1) + ' min';
-	document.getElementById("subETD1").innerHTML = date_toUntil(est2, sched2) + ' min';
-	document.getElementById("subETD2").innerHTML = date_toUntil(est3, sched3) + ' min';
-
-
-
-  }
+  
+  };
 
 
   // console.log(primaryResponse)
@@ -245,7 +217,16 @@ setInterval(() => {
         `${date_toTime(sched2)}\t${dest2}\t${date_toUntil(est2, sched2)}\t${run2service}\n` +
         `${date_toTime(sched3)}\t${dest3}\t${date_toUntil(est3, sched3)}\t${run3service}\n` +
         `${date_toTime(sched4)}\t${dest4}\t${date_toUntil(est4, sched4)}\t${run4service}\n`
-      )
+      );
+
+      // if(date_toUntil(est0, sched0) <= 1)
+      // {
+      //   if(moving == false)
+      //   {
+      //     move()
+      //     moving = true;
+      //   }
+      // };
 
 })();
 

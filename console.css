@@ -1,0 +1,225 @@
+@font-face { font-family: network-sans; src: url('https://archive.org/download/network-sans-2019/Network%20Sans%202019.zip/NETWORKSANS-2019-REGULAR.TTF'); } 
+* {
+font-family: network-sans;
+color: white;
+background-color: #484848;
+font-size: 2vw;
+}
+
+body{margin:0}
+
+.centre
+{
+    display: flex;
+    background-color: #222222;
+    width: 100%;
+    aspect-ratio: 32/9;
+    position:absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    margin: auto;
+}
+/* #burning-bar
+{
+    height:100%;
+    width:0%;
+    background-color: #0074d9;
+}
+#burning-bar,
+#primaryDepartureHeading {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
+
+#dest0{background-color: transparent;font-size: 250%;vertical-align: top;}
+
+/* here we go */
+
+#secondaryDeparturesMain
+{
+  float:left;
+  width: 30%;
+  height: 100%;
+}
+
+#secondaryDeparturesTable
+{
+    width:100%;
+  font-size: 200%;
+  text-align: center;
+  border-collapse: collapse;
+  border: solid 5px white; /* Convert px value to % */
+  height:100%;
+}
+
+.secondaryDeparturesTableHeading
+{
+  background-color: white;
+  color: black;
+  text-align: left;
+  font-size: 50%;
+  border-bottom: solid 1px white; /* Convert px value to % */
+}
+
+#futureTrainsHeadingShed
+{
+    width : 20%;
+}
+
+#futureTrainsHeading
+{
+  width: 50%;
+}
+
+#futureTrainsHeadingEsti
+{
+    width : 30%;
+}
+
+.secondaryDeparturesTableData
+{
+  padding-left: 1%;
+}
+
+#subTerm0, #subTerm1, #subTerm2
+{
+  font-weight: bolder;
+}
+
+#subServ0, #subServ1, #subServ2
+{
+    margin-left: -40%;
+    font-weight: normal;
+}
+
+#primaryDepartureHeading
+{
+
+    width:100%;
+    text-align: Left;
+    margin-top:-0.75vw;
+    /* margin-bottom: 0vw; */
+    border-collapse: collapse;
+    border-bottom: solid 1px white;
+    height:27.5%;
+}
+
+/* Old CSS Formatting */
+
+#subSTD0, #subSTD1, #subSTD2
+{
+    vertical-align: top;
+    text-align: left;
+    border-bottom: solid 1px white;
+}
+
+#subETD0, #subETD1, #subETD2
+{
+    vertical-align: top;
+    border-bottom: solid 1px white;
+}
+
+#nextTrainTable
+{
+    background-color: #222222;
+
+    padding:0px;
+    float:left;
+    width: 70%;
+    height: 100%;
+}
+/* Comment */
+
+
+
+
+
+#routeStops
+{
+    width:100%;
+    font-size: 175%;
+    text-align: Left;
+    border-collapse: collapse;
+    border-bottom: solid 1px white;
+    border-top: solid 1px white;
+    height: 75%;
+    /* height:50vh; */
+}
+
+
+#mainDeparture
+{
+    font-size: 250%;
+    font-weight:bolder;
+}
+
+#timeBorderL
+{
+    background-color: white;
+    border-bottom: solid 1px white;
+}
+#timeBorderR
+{
+    background-color: white;
+    border-bottom: solid 1px white;
+}
+
+#mainDepartureTable
+{
+  
+    background-color: #222222;
+    border-bottom: solid 1px white;
+}
+
+
+
+#mainDepartureSubTitle
+{
+  border-bottom: solid 1px white;
+  width:20%;
+}
+
+#mainDepartureHeading
+{
+  font-size: 50%;
+  vertical-align:bottom;
+}
+
+#mainETD, #mainSTD
+{
+  font-size: 100%;
+  vertical-align: top;
+}
+
+#futuretrainDestMain
+{
+  text-align: left;
+  border-bottom: solid 1px white;
+  vertical-align: text-top;
+}
+
+#arrivingTrains
+{
+  font-weight: bold;
+  border:none;
+  font-size:125%;
+}
+
+#noBorder
+{
+  border:none;
+}
+
+#clockBorder
+{
+  background-color: white;color:black;border-bottom: solid 1px white;
+}
+
+#time
+{
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  font-size: 125%;
+}

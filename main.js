@@ -14,6 +14,9 @@ var departureList = [];
 var stoppingList = [];
 var j = 0;
 var currentRunRef = 000000;
+var burnBar = document.getElementById("burning-bar");
+var moving = false;
+
 
 const urlQuery = window.location.search;
 const splitUrlQuery = urlQuery.split("/");
@@ -30,6 +33,7 @@ for (let j = 0; j < Object.keys(stations).length; j++) {
     break;
   }
 }
+
 
 function date_toTime(date) // Converts "YYYY-MM-DDTHH:MM:SSZ" to "HH:MM" (plus 24 to 12h time) 
 {
@@ -61,7 +65,7 @@ function id_toName(id)
   for (let m = 0; m < Object.keys(stations).length; m++) { 
     if(stations[m].stationId == id)
     {
-      return stations[m].stationName;   // console.log("The user station is: " + stopping_list[j].stationName);
+      return stations[m].stationName;
     }
   }
 };
@@ -141,6 +145,8 @@ setInterval(() => {
   {
     console.log("New Service Detected");
     currentRunRef = runRef0;
+    moving = false;
+    document.getElementById("burning-bar").style.width = "0%";
     secondaryRequest = "/v3/pattern/run/" + currentRunRef + "/route_type/0/?expand=all&stop_id=" + userStation + "&include_skipped_stops=true" + "&devid=" + devId;
 
     (async function() {
@@ -209,6 +215,15 @@ setInterval(() => {
         `${date_toTime(sched3)}\t${dest3}\t${date_toUntil(est3, sched3)}\t${run3service}\n` +
         `${date_toTime(sched4)}\t${dest4}\t${date_toUntil(est4, sched4)}\t${run4service}\n`
       );
+
+      // if(date_toUntil(est0, sched0) <= 1)
+      // {
+      //   if(moving == false)
+      //   {
+      //     move()
+      //     moving = true;
+      //   }
+      // };
 
 })();
 
