@@ -1,8 +1,8 @@
 {
-  "name": "mykiapitest",
+  "name": "dependency-less",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "A departure board for [PTV](https://www.ptv.vic.gov.au/) trains (Melbourne, Australia) based off the different styles of board on the current network. Written in HTML, JS, and CSS",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ptv-api": "^0.1.0"
+    "crypto-js": "^4.1.1"
   }
 }

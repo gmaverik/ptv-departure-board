@@ -2,28 +2,39 @@
 * {
 font-family: network-sans;
 color: white;
-background-color: #262626;
+background-color: #484848;
 font-size: 2vw;
 }
 
-/* td
+body{margin:0}
+
+.centre
 {
-  padding: 10px; 
+    display: flex;
+    background-color: #222222;
+    width: 100%;
+    aspect-ratio: 32/9;
+    position:absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    margin: auto;
+}
+/* #burning-bar
+{
+    height:100%;
+    width:0%;
+    background-color: #0074d9;
+}
+#burning-bar,
+#primaryDepartureHeading {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 } */
 
-/* New CSS Formatting */
+#dest0{background-color: transparent;font-size: 250%;vertical-align: top;}
 
-#body
-{
-  width: 100%;
-  aspect-ratio: 32 / 9;
-  background-color: aquamarine; /* Just to show the bounding box */
-}
-
-#licence
-{
-  font-size: 50%;
-}
+/* here we go */
 
 #secondaryDeparturesMain
 {
@@ -34,7 +45,7 @@ font-size: 2vw;
 
 #secondaryDeparturesTable
 {
-  width:100%;
+    width:100%;
   font-size: 200%;
   text-align: center;
   border-collapse: collapse;
@@ -84,6 +95,7 @@ font-size: 2vw;
 
 #primaryDepartureHeading
 {
+
     width:100%;
     text-align: Left;
     margin-top:-0.75vw;
@@ -110,6 +122,8 @@ font-size: 2vw;
 
 #nextTrainTable
 {
+    background-color: #222222;
+
     padding:0px;
     float:left;
     width: 70%;
@@ -153,15 +167,12 @@ font-size: 2vw;
 
 #mainDepartureTable
 {
-  border-bottom: solid 1px white;
+  
+    background-color: #222222;
+    border-bottom: solid 1px white;
 }
 
-#mainTerm
-{
-  /* vertical-align: -35%; */
-  font-size: 250%;
-  vertical-align: top;
-}
+
 
 #mainDepartureSubTitle
 {

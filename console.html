@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ptv-departure-board</title>
+    <link href="console.css" rel="stylesheet">
+    <script src="./stationNames.js"></script>
+    <script src="./keys.js"></script>
+    <script src="./bundle.js"></script>
+    <script src="./script.js"></script>
+
+  </head>
+
+  <body>
+
+  <div class="centre">
+    
+    <div id="nextTrainTable">
+
+      <table id="primaryDepartureHeading">   <!--Former id="mainTable"-->
+
+        <tr id="mainDeparture">
+
+          <td id="mainDepartureTable">
+            <span id="dest0">No Services</span>   <!--Former id="mainDepartureTitle"-->
+          </td>
+
+          <td id="mainDepartureSubTitle">
+            <span id="mainDepartureHeading">Scheduled</span>
+            <br>
+            <span id="mainSTD">--:--</span>    <!--Former id="mainDepartureShedTime"-->
+          </td>
+
+          <td id="mainDepartureSubTitle">
+            <span id="mainDepartureHeading">Departing</span>
+            <br>
+            <span id="mainETD">--min</span>   <!--Former id="mainDepartureUntil"-->
+          </td>
+
+        </tr>
+
+      </table>
+
+      <table id="routeStops">
+
+        <tr>
+          <td id="stopList0"></td>
+          <td id="stopList8"></td>
+          <td id="stopList16"></td>
+          <td id="stopList24"></td>
+        </tr>
+
+        <tr>
+          <td id="stopList1"></td>
+          <td id="stopList9"></td>
+          <td id="stopList17"></td>
+          <td id="stopList25"></td>
+        </tr>
+
+        <tr>
+          <td id="stopList2"></td>
+          <td id="stopList10"></td>
+          <td id="stopList18"></td>
+          <td id="stopList26"></td>
+        </tr>
+
+        <tr>
+          <td id="stopList3"></td>
+          <td id="stopList11"></td>
+          <td id="stopList19"></td>
+          <td id="stopList27"></td>
+        </tr>
+
+        <tr>
+          <td id="stopList4"></td>
+          <td id="stopList12"></td>
+          <td id="stopList20"></td>
+          <td id="stopList28"></td>
+        </tr>
+
+        <tr>
+          <td id="stopList5"></td>
+          <td id="stopList13"></td>
+          <td id="stopList21"></td>
+          <td id="stopList29"></td>
+        </tr>
+
+        <tr>
+          <td id="stopList6"></td>
+          <td id="stopList14"></td>
+          <td id="stopList22"></td>
+          <td id="stopList30"></td>
+        </tr>
+
+        <tr>
+          <td id="stopList7"></td>
+          <td id="stopList15"></td>
+          <td id="stopList23"></td>
+          <td id="stopList31"></td>
+        </tr>
+              
+      </table>
+          
+    </div>
+
+    <div id="secondaryDeparturesMain"> <!--Former id="futureTrains"-->
+          
+      <table id="secondaryDeparturesTable"> <!--Former id="subTable"-->
+  
+        <tr id="noBorder">
+          <td class="secondaryDeparturesTableHeading" id="futureTrainsHeadingShed">Schedule</td>
+          <td class="secondaryDeparturesTableHeading" id="futureTrainsHeading">Train to</td>
+          <td class="secondaryDeparturesTableHeading" id="futureTrainsHeadingEsti">Departing</td>
+        </tr>
+  
+        <tr id="arrivingTrains">
+
+          <td class='secondaryDeparturesTableData' id="subSTD0">--</td>   <!--Former id="subTimes1"-->
+  
+          <td class='secondaryDeparturesTableData' id="futuretrainDestMain" >
+            <span id="subTerm0">--</span>   <!--Former id="futureTrainDest1"-->
+            <br>
+            <span id="subServ0"></span>    <!--Former id="subServiceType1"-->
+          </td>
+  
+          <td class='secondaryDeparturesTableData' id="subETD0">-- min</td>   <!--Former id="subUntil1"-->
+
+        </tr>
+  
+        <tr id="arrivingTrains">
+  
+          <td class='secondaryDeparturesTableData' id="subSTD1">--</td>    <!--Former id="subTimes2"-->
+  
+          <td class='secondaryDeparturesTableData' id="futuretrainDestMain" >
+            <span id="subTerm1">--</span>   <!--Former id="futureTrainDest2"-->
+            <br>
+            <span id="subServ1"></span>    <!--Former id="subServiceType2"-->
+          </td>
+  
+          <td class='secondaryDeparturesTableData' id="subETD1">-- min</td>    <!--Former id="subUntil2"-->
+  
+        </tr>
+  
+        <tr id="arrivingTrains">
+  
+          <td class='secondaryDeparturesTableData' id="subSTD2">--</td>    <!--Former id="subTimes2"-->
+  
+          <td class='secondaryDeparturesTableData' id="futuretrainDestMain" >
+            <span id="subTerm2">--</span>   <!--Former id="futureTrainDest2"-->
+            <br>
+            <span id="subServ2"></span>    <!--Former id="subServiceType2"-->
+          </td>
+  
+          <td class='secondaryDeparturesTableData' id="subETD2">-- min</td>    <!--Former id="subUntil2"-->
+  
+        </tr>
+  
+        <tr id="noBorder">
+  
+          <td id="timeBorderL"></td>
+
+          <td id="clockBorder">
+            <span id="time">--:--</span>
+          </td>
+
+          <td id="timeBorderR"></td>
+  
+        </tr>
+  
+      </table>
+          
+    </div>  
+
+  </div>
+  </div>
+
+  </body>
